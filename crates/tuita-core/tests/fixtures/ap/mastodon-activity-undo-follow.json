@@ -1,0 +1,12 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada#follows/41/undo",
+  "type": "Undo",
+  "actor": "https://mastodon.example/users/ada",
+  "object": {
+    "id": "https://mastodon.example/aa3e2c0a-8d0c-4e7a-9b7e-7a5c4b1e0001",
+    "type": "Follow",
+    "actor": "https://mastodon.example/users/ada",
+    "object": "https://social.example/users/bea"
+  }
+}

@@ -1,0 +1,555 @@
+/* The /design gallery. Each block is scoped to one gallery component; sections append theirs below. */
+
+@scope ([data-c="design-page"]) to ([data-c]) {
+	:scope {
+		max-width: 1080px;
+		margin: 0 auto;
+		padding: clamp(16px, 4vw, 48px);
+	}
+
+	.top {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		background: var(--paper);
+		border-bottom: 1px solid var(--line);
+	}
+
+	main {
+		display: flex;
+		flex-direction: column;
+		padding-top: var(--s5);
+	}
+
+	.index {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s2) var(--s4);
+		margin: var(--s4) 0;
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.index a {
+		color: var(--ink-dim);
+		text-underline-offset: 4px;
+	}
+
+	.index a:hover {
+		color: var(--ink);
+	}
+}
+
+@scope ([data-c="design-section"]) to ([data-c]) {
+	:scope {
+		scroll-margin-top: 120px;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s4);
+		padding-block: var(--s5);
+		border-top: 1px solid var(--line);
+	}
+
+	header {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s4);
+	}
+}
+
+@scope ([data-c="design-row"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.items {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s4);
+	}
+}
+
+@scope ([data-c="design-toolbar"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		gap: var(--s4) var(--s5);
+		padding: var(--s3) 0;
+	}
+}
+
+@scope ([data-c="design-control"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+		min-width: 0;
+		max-width: 100%;
+	}
+}
+
+/* `prefs.js` marks the stored choice with aria-selected; only that segment draws its pill. */
+[data-c="design-control"] .segment[aria-selected="false"] .pill {
+	display: none;
+}
+
+/* ---- core ---- */
+/* Gallery-only rules of the core groups: actions, forms, overlays, feedback, identity, dither. */
+
+@scope ([data-c="design-grid"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: var(--s5);
+	}
+}
+
+@scope ([data-c="design-narrow"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s4);
+		max-width: 420px;
+	}
+}
+
+@scope ([data-c="design-vertical"]) to ([data-c]) {
+	:scope {
+		height: 64px;
+	}
+}
+
+@scope ([data-c="design-lines"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+}
+
+@scope ([data-c="design-icons"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+		gap: var(--s3);
+	}
+
+	.cell {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s2);
+		padding: var(--s3) var(--s2);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		text-align: center;
+	}
+}
+
+/* The 404 draws a page-wide grain on `body`; the gallery's NotFound demo has none (`grain={false}`). */
+html body:has([data-c="design-page"])::before {
+	display: none;
+}
+
+/* Card and Bento demos. Their content sits inside nested components, so the rules are plain
+   descendants of the wrapper instead of an @scope. */
+[data-c="design-bento"] .hero {
+	padding: 26px;
+}
+
+[data-c="design-bento"] .hero-copy .rule {
+	width: 56px;
+	height: 2px;
+	background: var(--ink);
+	margin-bottom: 14px;
+}
+
+[data-c="design-bento"] .stroke {
+	color: transparent;
+	-webkit-text-stroke: 1px var(--ink);
+}
+
+[data-c="design-bento"] h2 {
+	font-size: clamp(26px, 3.6vw, 40px);
+	line-height: 1.02;
+	max-width: 12ch;
+}
+
+[data-c="design-bento"] p {
+	font-size: var(--t-sm);
+	line-height: 1.6;
+	color: var(--ink);
+	max-width: 34ch;
+}
+
+[data-c="design-bento"] p strong {
+	color: var(--ink);
+	font-weight: 600;
+}
+
+[data-c="design-bento"] .num {
+	font-family: var(--font-mono);
+	font-size: clamp(34px, 4.5vw, 46px);
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+
+[data-c="design-bento"] .unit {
+	font-size: 0.42em;
+	color: var(--ink-dim);
+	margin-left: 3px;
+	letter-spacing: 0;
+}
+
+[data-c="design-bento"] .sub {
+	font-family: var(--font-mono);
+	font-size: var(--t-xs);
+	letter-spacing: 0.14em;
+	color: var(--ink-dim);
+	margin-top: 10px;
+	text-transform: uppercase;
+}
+
+[data-c="design-bento"] .time {
+	font-family: var(--font-mono);
+	font-size: clamp(26px, 3.2vw, 36px);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+}
+
+[data-c="design-bento"] .colon {
+	color: var(--ink-dim);
+	animation: design-blink 1s steps(2) infinite;
+}
+
+@keyframes design-blink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+	50%,
+	100% {
+		opacity: 0.15;
+	}
+}
+
+[data-c="design-bento"] .bars {
+	display: flex;
+	align-items: flex-end;
+	gap: 7px;
+	height: 62px;
+}
+
+[data-c="design-bento"] .bar {
+	position: relative;
+	flex: 1;
+	min-height: 6px;
+	display: block;
+}
+
+[data-c="design-bento"] .bar .fill {
+	position: absolute;
+	inset: 0;
+	border-radius: 3px;
+}
+
+[data-c="design-bento"] .cap {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 3px;
+	background: var(--ink);
+	border-radius: 3px 3px 0 0;
+}
+
+/* DitherField, DitherFill, DitherText, DitherNumber and the global classes. */
+@scope ([data-c="design-fields"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: var(--s4);
+	}
+}
+
+@scope ([data-c="design-levels"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+		gap: var(--s4);
+	}
+}
+
+@scope ([data-c="design-frame"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.frame {
+		position: relative;
+		aspect-ratio: 1;
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		overflow: hidden;
+	}
+
+	.swatch {
+		position: relative;
+		height: 72px;
+		border: 1px solid var(--line);
+	}
+}
+
+[data-c="design-frame"] .swatch .fill {
+	position: absolute;
+	inset: 0;
+}
+
+@scope ([data-c="design-display"]) to ([data-c]) {
+	:scope {
+		font-size: clamp(36px, 7vw, 72px);
+	}
+
+	:scope.small {
+		font-size: clamp(24px, 4vw, 40px);
+	}
+}
+
+@scope ([data-c="design-big"]) to ([data-c]) {
+	:scope {
+		font-family: var(--font-pixel);
+		font-size: var(--t-3xl);
+		letter-spacing: -0.02em;
+	}
+}
+
+@scope ([data-c="design-box"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		overflow: hidden;
+		display: grid;
+		place-items: center;
+		width: 160px;
+		height: 96px;
+		border: 1px solid var(--line);
+	}
+
+	:scope.checker {
+		opacity: 0.5;
+	}
+}
+
+/* ---- domain ---- */
+/* Gallery frames of the domain sections (design-domain). */
+
+@scope ([data-c="design-domain"]) to ([data-c]) {
+	:scope.frame {
+		position: relative;
+		max-width: 640px;
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		overflow: hidden;
+		transform: translateZ(0);
+	}
+
+	:scope.stack {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		padding: var(--s4);
+	}
+
+	:scope.tall {
+		height: 560px;
+		max-width: 280px;
+	}
+
+	:scope.bottom {
+		height: 72px;
+	}
+
+	:scope.pill {
+		height: 80px;
+	}
+
+	:scope.picker {
+		max-width: 320px;
+	}
+
+	.empty {
+		padding: var(--s4);
+		color: var(--ink-dim);
+	}
+}
+
+/* The rail and the bottom bar sit in their frame instead of the viewport. */
+[data-c="design-domain"].tall [data-c="rail-nav"] {
+	position: static;
+	height: 100%;
+}
+
+[data-c="design-domain"].bottom [data-c="bottom-bar"] {
+	position: absolute;
+}
+
+/* ---- admin ---- */
+/* Gallery: admin, federation and OAuth sections. */
+
+@scope ([data-c="design-admin-frame"]) to ([data-c]) {
+	:scope {
+		max-width: 640px;
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		overflow: hidden;
+	}
+
+	:scope.pad {
+		padding: var(--s3);
+	}
+
+	hr {
+		margin: 0;
+		border: 0;
+		border-top: 1px solid var(--line);
+	}
+}
+
+@scope ([data-c="design-oauth-grid"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+		gap: var(--s5);
+		align-items: start;
+	}
+}
+
+@scope ([data-c="design-oauth-state"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		min-width: 0;
+	}
+}
+
+/* ---- media ---- */
+/* The media and encryption sections of the gallery (design-frame). */
+
+@scope ([data-c="design-frame"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		max-width: 640px;
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		overflow: hidden;
+		transform: translateZ(0);
+	}
+
+	:scope.stack {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		padding: var(--s4);
+	}
+}
+
+@scope ([data-c="design-foot"]) to ([data-c]) {
+	:scope {
+		padding: var(--s3) var(--s4);
+		border-top: 1px solid var(--line);
+	}
+}
+
+@scope ([data-c="design-drop"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		place-items: center;
+		gap: var(--s1);
+		min-height: 140px;
+		padding: var(--s4);
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		text-align: center;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+}
+
+@scope ([data-c="design-clip"]) to ([data-c]) {
+	:scope {
+		display: grid;
+		aspect-ratio: 16 / 9;
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		overflow: hidden;
+	}
+
+	:scope.square {
+		aspect-ratio: 1;
+		max-width: 320px;
+	}
+}
+
+/* A demo area lays its parts out like the section around it. */
+[data-design-sandbox] {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s4);
+}
+
+/* The wrappers of pickers that sit in a row next to a readout. */
+[data-design-emoji],
+[data-design-schedule] {
+	display: contents;
+}
+
+/* The chat note and footer render every variant `hidden` for `messages.js`; a demo shows the one
+   it names. These rules out-rank the component's own `[hidden]` rules by one more ancestor. */
+[data-design-note="sealed"] [data-c="chat-note"] [data-note="sealed"][hidden],
+[data-design-note="unencrypted"] [data-c="chat-note"] [data-note="unencrypted"][hidden],
+[data-design-note="remote"] [data-c="chat-note"] [data-note="remote"][hidden] {
+	display: flex;
+}
+
+[data-design-note="sealed"] [data-c="chat-note"] .link[hidden] {
+	display: block;
+}
+
+[data-design-block="setup"] [data-c="chat-footer"] [data-block="setup"][hidden],
+[data-design-block="unlock"] [data-c="chat-footer"] [data-block="unlock"][hidden],
+[data-design-block="peer-off"] [data-c="chat-footer"] [data-block="peer-off"][hidden],
+[data-design-block="downgrade"] [data-c="chat-footer"] [data-block="downgrade"][hidden],
+[data-design-block="server"] [data-c="chat-footer"] [data-block="server"][hidden] {
+	display: block;
+}
+
+[data-design-block="changed"] [data-c="chat-footer"] [data-block="changed"][hidden] {
+	display: flex;
+}
+
+[data-design-block="setup"] [data-c="chat-footer"] .rest,
+[data-design-block="unlock"] [data-c="chat-footer"] .rest {
+	display: none;
+}
+

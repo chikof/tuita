@@ -1,0 +1,8 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada#delete",
+  "type": "Delete",
+  "actor": "https://mastodon.example/users/ada",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "object": "https://mastodon.example/users/ada"
+}

@@ -1,0 +1,19 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"sensitive": "as:sensitive", "toot": "http://joinmastodon.org/ns#", "blurhash": "toot:blurhash"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000002",
+  "type": "Note",
+  "summary": "Spoilers: season finale &amp; <b>more</b>",
+  "inReplyTo": "https://mastodon.example/users/ada/statuses/113200000000000001",
+  "published": "2026-11-08T10:00:00Z",
+  "updated": "2026-11-08T10:05:30Z",
+  "url": "https://mastodon.example/@ada/113200000000000002",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "to": ["https://mastodon.example/users/ada/followers"],
+  "cc": ["https://www.w3.org/ns/activitystreams#Public"],
+  "sensitive": true,
+  "content": "<p>The ending was great.</p>",
+  "attachment": [
+    {"type": "Document", "mediaType": "image/jpeg", "url": "https://mastodon.example/system/media_attachments/files/113/200/000/000/000/003/original/finale.jpg", "name": "A blurry screenshot", "blurhash": "UBGSA@~q9Zof_3ofIUj[9Zof9Zay?bj[ofj["}
+  ],
+  "tag": []
+}

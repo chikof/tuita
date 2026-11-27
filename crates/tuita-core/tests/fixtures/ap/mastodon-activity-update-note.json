@@ -1,0 +1,25 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"sensitive": "as:sensitive"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000001#updates/1731070200",
+  "type": "Update",
+  "actor": "https://mastodon.example/users/ada",
+  "published": "2026-11-08T13:30:00Z",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/users/ada/followers"],
+  "object": {
+    "id": "https://mastodon.example/users/ada/statuses/113200000000000001",
+    "type": "Note",
+    "summary": null,
+    "inReplyTo": null,
+    "published": "2026-11-08T09:30:12Z",
+    "updated": "2026-11-08T13:30:00Z",
+    "url": "https://mastodon.example/@ada/113200000000000001",
+    "attributedTo": "https://mastodon.example/users/ada",
+    "to": ["https://www.w3.org/ns/activitystreams#Public"],
+    "cc": ["https://mastodon.example/users/ada/followers"],
+    "sensitive": false,
+    "content": "<p>Good morning! (edited: fixed a typo)</p>",
+    "attachment": [],
+    "tag": []
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"toot": "http://joinmastodon.org/ns#", "votersCount": "toot:votersCount"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000006",
+  "type": "Question",
+  "published": "2026-11-01T08:00:00Z",
+  "url": "https://mastodon.example/@ada/113200000000000006",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/users/ada/followers"],
+  "sensitive": false,
+  "content": "<p>Which languages do you use?</p>",
+  "endTime": "2026-11-02T08:00:00Z",
+  "closed": "2026-11-02T08:00:00Z",
+  "votersCount": 10,
+  "anyOf": [
+    {"type": "Note", "name": "Rust", "replies": {"type": "Collection", "totalItems": 8}},
+    {"type": "Note", "name": "Go", "replies": {"type": "Collection", "totalItems": 5}},
+    {"type": "Note", "name": "Zig", "replies": {"type": "Collection", "totalItems": 0}}
+  ]
+}

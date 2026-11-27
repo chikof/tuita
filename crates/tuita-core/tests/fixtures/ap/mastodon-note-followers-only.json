@@ -1,0 +1,16 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"sensitive": "as:sensitive"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000004",
+  "type": "Note",
+  "summary": null,
+  "inReplyTo": null,
+  "published": "2026-11-08T12:00:00Z",
+  "url": "https://mastodon.example/@ada/113200000000000004",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "to": ["https://mastodon.example/users/ada/followers"],
+  "cc": [],
+  "sensitive": false,
+  "content": "<p>Followers only.</p>",
+  "attachment": [],
+  "tag": []
+}

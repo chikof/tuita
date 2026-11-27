@@ -1,0 +1,16 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "actor": "https://gts.example/users/ada",
+  "id": "https://gts.example/users/ada/statuses/01H0BOOST0000000000000000A/undo",
+  "object": {
+    "actor": "https://gts.example/users/ada",
+    "cc": ["https://gts.example/users/ada/followers", "https://social.example/users/bea"],
+    "id": "https://gts.example/users/ada/statuses/01H0BOOST0000000000000000A",
+    "object": "https://social.example/users/bea/statuses/0192a4b6-7c3e-7f10-9a42-3d5c8e1f2a07",
+    "published": "2026-11-08T20:00:00Z",
+    "to": "https://www.w3.org/ns/activitystreams#Public",
+    "type": "Announce"
+  },
+  "to": "https://www.w3.org/ns/activitystreams#Public",
+  "type": "Undo"
+}

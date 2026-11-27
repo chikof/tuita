@@ -1,0 +1,6 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://gts.example/users/ada/outbox",
+  "type": "OrderedCollection",
+  "first": "https://gts.example/users/ada/outbox?page=true"
+}

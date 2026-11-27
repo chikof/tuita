@@ -1,0 +1,3 @@
+# Stable rustfmt options only; `cargo fmt --all --check` runs in scripts/check.sh.
+max_width = 100
+hex_literal_case = "Lower"

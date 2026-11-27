@@ -1,0 +1,13 @@
+{
+  "body": "{\"@context\":\"https://www.w3.org/ns/activitystreams\",\"id\":\"https://mastodon.example/users/ada#follows/41/undo\",\"type\":\"Undo\",\"actor\":\"https://mastodon.example/users/ada\",\"object\":{\"id\":\"https://mastodon.example/aa3e2c0a-8d0c-4e7a-9b7e-7a5c4b1e0001\",\"type\":\"Follow\",\"actor\":\"https://mastodon.example/users/ada\",\"object\":\"https://social.example/users/bea\"}}",
+  "headers": {
+    "Content-Type": "application/activity+json",
+    "Date": "Mon, 09 Nov 2026 12:00:00 GMT",
+    "Digest": "SHA-256=LqP4vjXKzrKAidwzQhKhdhY+8Gl1IhhRYrCRzjl1AJM=",
+    "Host": "social.example",
+    "Signature": "keyId=\"https://mastodon.example/users/ada#main-key\",algorithm=\"rsa-sha256\",headers=\"(request-target) host date digest content-type\",signature=\"GopnXBbSzdhby4U7FeftqPsesifFVIFAIr1U4GwUdk1rGn2mCCb3DunZZFrugCmwEaW9QFk3+rodM1FfoeTTgUoxTio3kcxXdjBswSnNTZKurGxs5NIIwR9o1t/AdlXEGHlR4LDgrU+hNjAjOGVeDpb/TOjUlnsAugFfp0hfiREs3UJWUuIWUD2VyygxtjUUFS9fDcq1YXs2dKTbeDKykOSQ0+RnOYFfb9maTt6SGKrwk05MYG+YBjrj9Wfx+qE9R96aw3A8ZtYBFV9UurZapvvEGp+a3RCY7HP4tDB3OJ11DMqSRSJ8slJRQ3YgUAaOrC8UQrasY7LMqS3r2P2A4g==\""
+  },
+  "method": "POST",
+  "path": "/users/bea/inbox",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtUdm+hegOnsMD/6GMwpP\n+9ljM+kKx1OZJZZE+AQEL+Pr6dmOOcZ9jYxzV6mfwuBqP69Sq/v5eNx0oApi0AiV\n8WFX/4CdOi17iaAzF1T+xh0Mw1jt5K+YQCLxKHiEezupJSVeWrzd3dfIiMYGFnsN\nInfPg5ato60ntrDESSUXy5Rqu9tqzMMtS1XSzJnFi63zJZUWIItrAqEh+Ez93ui4\nbT6a9bJpy+vua9XdK/+Pyz8811h6Otbpqtx0+xaltNz31xrKqW4LUQ+1y+XCwM1x\n7z5Jze8rmmoBHDMnb+K5VQZhPMN+umh0X6r3Lr1voHUfJo9wKShLKCUakLCZfdQT\newIDAQAB\n-----END PUBLIC KEY-----\n"
+}

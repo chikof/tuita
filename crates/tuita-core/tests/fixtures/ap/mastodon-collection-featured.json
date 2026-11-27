@@ -1,0 +1,23 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"toot": "http://joinmastodon.org/ns#", "sensitive": "as:sensitive"}],
+  "id": "https://mastodon.example/users/ada/collections/featured",
+  "type": "OrderedCollection",
+  "totalItems": 1,
+  "orderedItems": [
+    {
+      "id": "https://mastodon.example/users/ada/statuses/113200000000000001",
+      "type": "Note",
+      "summary": null,
+      "inReplyTo": null,
+      "published": "2026-11-08T09:30:12Z",
+      "url": "https://mastodon.example/@ada/113200000000000001",
+      "attributedTo": "https://mastodon.example/users/ada",
+      "to": ["https://www.w3.org/ns/activitystreams#Public"],
+      "cc": ["https://mastodon.example/users/ada/followers"],
+      "sensitive": false,
+      "content": "<p>Pinned: welcome to my profile.</p>",
+      "attachment": [],
+      "tag": []
+    }
+  ]
+}

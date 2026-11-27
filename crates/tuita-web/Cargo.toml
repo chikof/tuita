@@ -1,0 +1,38 @@
+[package]
+name = "tuita-web"
+description = "tuita web client: server-rendered pages on Topcoat."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+axum.workspace = true
+fixed_decimal.workspace = true
+icu_calendar.workspace = true
+icu_datetime.workspace = true
+icu_decimal.workspace = true
+icu_locale.workspace = true
+percent-encoding.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+time.workspace = true
+tokio.workspace = true
+topcoat.workspace = true
+tower.workspace = true
+tracing.workspace = true
+tuita-core.workspace = true
+tuita-server.workspace = true
+url.workspace = true
+uuid.workspace = true
+writeable = "0.6.4"
+
+[dev-dependencies]
+fluent-syntax.workspace = true
+icu_plurals = "2.4.0"
+sqlx.workspace = true

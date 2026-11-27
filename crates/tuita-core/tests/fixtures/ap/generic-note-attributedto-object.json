@@ -1,0 +1,10 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000021",
+  "type": "Note",
+  "attributedTo": {"type": "Person", "id": "https://mastodon.example/users/ada", "name": "Ada Example"},
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": [],
+  "published": "2026-11-08T21:10:00Z",
+  "content": "<p>The author is an embedded object.</p>"
+}

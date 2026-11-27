@@ -1,0 +1,1124 @@
+/* Posts: card, actions, thread, poll, rich text, names, hover card and the dialogs of a post.
+   Media, the lightbox and the video player are in media.css. Each block is scoped to the
+   component of the same `data-c` name with @scope; rules for markup a nested component draws
+   sit outside the scope and name the owner explicitly. */
+
+/* emote */
+.emote {
+	display: inline-block;
+	height: 1.4em;
+	width: auto;
+	vertical-align: -0.3em;
+	filter: none;
+	image-rendering: auto;
+}
+
+/* user-name */
+@scope ([data-c="user-name"]) to ([data-c]) {
+	:scope {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+		min-width: 0;
+		font-weight: 600;
+	}
+
+	.text {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.mark {
+		display: inline-flex;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		width: 16px;
+		height: 16px;
+		background: var(--ink);
+		color: var(--paper-on-ink);
+	}
+
+	.bot {
+		flex: none;
+		padding: 0 var(--s1);
+		border: 1px solid var(--line);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+	}
+}
+
+/* rich-text */
+@scope ([data-c="rich-text"]) to ([data-c]) {
+	:scope {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+	}
+
+	a {
+		color: var(--ink);
+		text-decoration: underline;
+		text-decoration-style: dotted;
+		text-underline-offset: 3px;
+	}
+
+	a:hover {
+		text-decoration-style: solid;
+	}
+}
+
+/* domain-chip */
+@scope ([data-c="domain-chip"]) to ([data-c]) {
+	:scope {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+		max-width: 100%;
+		min-width: 0;
+		padding: 0 var(--s2);
+		border: 1px solid var(--line);
+		border-radius: var(--r-pill);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		line-height: 1.6;
+		color: var(--ink-dim);
+	}
+
+	.domain {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+/* visibility-badge */
+@scope ([data-c="visibility-badge"]) to ([data-c]) {
+	:scope {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+		padding: 0 var(--s2);
+		border: 1px solid var(--line);
+		border-radius: var(--r-pill);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.08em;
+		line-height: 1.6;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+		white-space: nowrap;
+	}
+}
+
+/* link-card */
+@scope ([data-c="link-card"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		min-width: 0;
+		overflow: hidden;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		color: var(--ink);
+		text-decoration: none;
+		transition: border-color var(--dur-fast) ease;
+	}
+
+	:scope:hover {
+		border-color: var(--line-hot);
+	}
+
+	:scope.large {
+		flex-direction: column;
+	}
+
+	.media {
+		position: relative;
+		overflow: hidden;
+		flex: none;
+		display: grid;
+		place-items: center;
+		width: 96px;
+		min-height: 96px;
+		background: var(--surface-hover);
+		color: var(--ink-dim);
+	}
+
+	:scope.large .media {
+		width: 100%;
+		aspect-ratio: 1.91;
+		min-height: 0;
+	}
+
+	img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		image-rendering: auto;
+	}
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		min-width: 0;
+		padding: var(--s3);
+	}
+
+	.site {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.title {
+		font-weight: 600;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		overflow-wrap: anywhere;
+	}
+
+	.desc {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		overflow-wrap: anywhere;
+	}
+}
+
+/* quote-card */
+@scope ([data-c="quote-card"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		padding: var(--s3);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	a:scope:hover {
+		border-color: var(--line-hot);
+	}
+
+	.head {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		min-width: 0;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.text {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		display: -webkit-box;
+		-webkit-line-clamp: 6;
+		line-clamp: 6;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	:scope.gone {
+		color: var(--ink-dim);
+	}
+}
+
+/* content-warning: the body shows once post.js flips aria-expanded and removes `hidden`. */
+@scope ([data-c="content-warning"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.head {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+	}
+
+	.reason {
+		flex: 1;
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	button {
+		flex: none;
+		padding: var(--s1) var(--s3);
+		background: transparent;
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	button:hover {
+		border-color: var(--line-hot);
+	}
+
+	.veil {
+		position: relative;
+		height: 28px;
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		color: var(--ink-dim);
+		overflow: hidden;
+	}
+
+	.veil[hidden] {
+		display: none;
+	}
+}
+
+[data-c="content-warning"] .veil .fill {
+	position: absolute;
+	inset: 0;
+	--fill: var(--ink-dim);
+}
+
+/* heart: the pixel heart silhouette on the 2 px grid, cut by the page-wide
+   Bayer levels (--l1 .. --l4) in four steps. */
+@scope ([data-c="heart"]) to ([data-c]) {
+	:scope {
+		--heart-shape: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M5%202h4v2h-4zM15%202h4v2h-4zM3%204h8v2h-8zM13%204h8v2h-8zM1%206h22v2h-22zM1%208h22v2h-22zM1%2010h22v2h-22zM3%2012h18v2h-18zM5%2014h14v2h-14zM7%2016h10v2h-10zM9%2018h6v2h-6zM11%2020h2v2h-2z'%2F%3E%3C%2Fsvg%3E");
+		position: relative;
+		display: inline-flex;
+		width: 20px;
+		height: 20px;
+	}
+
+	i {
+		position: absolute;
+		inset: 0;
+		display: none;
+		background: currentColor;
+		mask-size: 100%, calc(var(--cell) * 4);
+		-webkit-mask-size: 100%, calc(var(--cell) * 4);
+		mask-composite: intersect;
+		-webkit-mask-composite: source-in;
+		mask-image: var(--heart-shape), var(--l4);
+		-webkit-mask-image: var(--heart-shape), var(--l4);
+		image-rendering: pixelated;
+	}
+
+	:scope.filled i {
+		display: block;
+	}
+
+	:scope.pop i {
+		animation: heart-fill 0.32s step-end both;
+	}
+}
+
+@keyframes heart-fill {
+	0% {
+		mask-image: var(--heart-shape), var(--l1);
+		-webkit-mask-image: var(--heart-shape), var(--l1);
+	}
+	25% {
+		mask-image: var(--heart-shape), var(--l2);
+		-webkit-mask-image: var(--heart-shape), var(--l2);
+	}
+	50% {
+		mask-image: var(--heart-shape), var(--l3);
+		-webkit-mask-image: var(--heart-shape), var(--l3);
+	}
+	75%,
+	100% {
+		mask-image: var(--heart-shape), var(--l4);
+		-webkit-mask-image: var(--heart-shape), var(--l4);
+	}
+}
+
+/* poll */
+@scope ([data-c="poll"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		max-width: 480px;
+	}
+
+	ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.choice {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s2);
+		width: 100%;
+		min-height: 40px;
+		padding: var(--s2) var(--s3);
+		background: transparent;
+		border: 1px solid var(--line-hot);
+		border-radius: var(--r-ctl);
+		color: var(--ink);
+		text-align: left;
+		overflow-wrap: anywhere;
+	}
+
+	.choice:hover:not(:disabled),
+	.choice.on {
+		background: var(--ink);
+		color: var(--paper-on-ink);
+	}
+
+	.choice .tick[hidden] {
+		display: none;
+	}
+
+	.row {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: var(--s1) var(--s2);
+		padding: var(--s2) 0;
+	}
+
+	.label {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+		overflow-wrap: anywhere;
+	}
+
+	.winner .label,
+	.voted .label {
+		font-weight: 600;
+	}
+
+	.pct {
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		font-variant-numeric: tabular-nums;
+		color: var(--ink-dim);
+	}
+
+	.bar {
+		grid-column: 1 / -1;
+		height: 10px;
+		border: 1px solid var(--line);
+		overflow: hidden;
+	}
+
+	.fill {
+		display: block;
+		height: 100%;
+		border-right: 2px solid var(--ink);
+		transition: width var(--dur) var(--ease);
+	}
+
+	.foot {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	@media (pointer: coarse) {
+		.choice {
+			min-height: 44px;
+		}
+	}
+}
+
+[data-c="poll"] .fill [data-c="dither-fill"] {
+	height: 100%;
+}
+
+/* post-actions: written without @scope because the repost and share triggers live inside
+   the menu component. */
+[data-c="post-actions"] {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-inline: calc(-1 * var(--s2));
+}
+
+[data-c="post-actions"] .main {
+	display: flex;
+	flex: 1 1 auto;
+	justify-content: space-between;
+	min-width: 0;
+	max-width: 340px;
+}
+
+[data-c="post-actions"] .end {
+	display: flex;
+	flex: none;
+}
+
+[data-c="post-actions"].big {
+	margin-inline: 0;
+	padding-block: var(--s1);
+	border-block: 1px solid var(--line);
+}
+
+[data-c="post-actions"].big .main {
+	max-width: none;
+	margin-inline-end: var(--s4);
+}
+
+[data-c="post-actions"] .act {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--s1);
+	min-width: 40px;
+	min-height: 36px;
+	padding: 0 var(--s2);
+	background: transparent;
+	border: 0;
+	border-radius: var(--r-ctl);
+	color: var(--ink-dim);
+	font-family: var(--font-mono);
+	font-size: var(--t-xs);
+	font-variant-numeric: tabular-nums;
+	justify-content: center;
+	transition: color var(--dur-fast) ease;
+}
+
+[data-c="post-actions"] .act:hover,
+[data-c="post-actions"] .on {
+	color: var(--ink);
+}
+
+[data-c="post-actions"] .act[aria-disabled="true"] {
+	opacity: 0.5;
+}
+
+[data-c="post-actions"] .count:empty {
+	display: none;
+}
+
+@media (pointer: coarse) {
+	[data-c="post-actions"] .act {
+		min-height: 44px;
+		min-width: 44px;
+	}
+}
+
+/* The stats row of a post page and of the lightbox panel. */
+@scope ([data-c="post-stats"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s1) var(--s4);
+		padding: var(--s2) 0;
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.stat b {
+		color: var(--ink);
+		font-family: var(--font-mono);
+	}
+
+	.link {
+		background: transparent;
+		border: 0;
+		padding: 0;
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	.link:hover {
+		text-decoration: underline;
+	}
+}
+
+/* The body of a post (text, media, link card, poll): the part a content warning hides. */
+@scope ([data-c="post-body"]) to ([data-c]) {
+	:scope {
+		display: contents;
+	}
+
+	.text {
+		font-size: var(--t-md);
+	}
+
+	:scope[data-main] .text {
+		font-size: var(--t-lg);
+	}
+}
+
+[data-slot="card"] {
+	display: contents;
+}
+
+/* post-card */
+@scope ([data-c="post-card"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		/* `clip`, not `hidden`: a hidden box is still a scroll container, and focusing or scrolling to a
+		   control inside it shifted the card content under the pointer (a click then missed its button). */
+		overflow: clip;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		padding: var(--s4);
+		cursor: pointer;
+		outline-offset: -2px;
+	}
+
+	:scope.main {
+		cursor: auto;
+	}
+
+	.context {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		padding-left: 52px;
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.context a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.context a:hover {
+		text-decoration: underline;
+	}
+
+	.grid {
+		display: flex;
+		gap: var(--s3);
+		min-width: 0;
+	}
+
+	.side {
+		position: relative;
+		flex: none;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.side.down::after,
+	.side.up::before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		width: 2px;
+		margin-left: -1px;
+		background: var(--line);
+	}
+
+	.side.down::after {
+		top: 48px;
+		bottom: calc(-1 * var(--s4) - var(--s2));
+	}
+
+	.side.up::before {
+		bottom: calc(100% - 2px);
+		top: calc(-1 * var(--s4) - var(--s2));
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		flex: 1;
+		min-width: 0;
+	}
+
+	header {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		min-width: 0;
+	}
+
+	.who {
+		display: flex;
+		align-items: baseline;
+		flex: 0 1 auto;
+		gap: var(--s2);
+		min-width: 0;
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	:scope.main .who {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0;
+	}
+
+	.handle,
+	.time {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-decoration: none;
+	}
+
+	.time {
+		flex: none;
+	}
+
+	.time:hover {
+		text-decoration: underline;
+	}
+
+	.edited {
+		flex: none;
+		padding: 0;
+		background: transparent;
+		border: 0;
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		text-decoration: underline dotted;
+		cursor: pointer;
+	}
+
+	.menu {
+		margin-left: auto;
+		flex: none;
+		display: inline-flex;
+		color: var(--ink-dim);
+	}
+
+	.reply-to {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.origin {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s2);
+		min-width: 0;
+	}
+
+	.original {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+		min-width: 0;
+		color: var(--ink-dim);
+		font-size: var(--t-xs);
+		text-decoration: none;
+		overflow-wrap: anywhere;
+	}
+
+	.original:hover {
+		color: var(--ink);
+		text-decoration: underline;
+	}
+
+	@media (pointer: coarse) {
+		.original {
+			min-height: 44px;
+		}
+	}
+
+	.stamp {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+}
+
+[data-c="post-card"] .who:hover [data-c="user-name"] .text {
+	text-decoration: underline;
+}
+
+[data-c="post-card"] .more {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 32px;
+	min-height: 32px;
+}
+
+/* post-thread */
+@scope ([data-c="post-thread"]) to ([data-c]) {
+	.row {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.main {
+		scroll-margin-top: 72px;
+	}
+
+	.note {
+		padding: var(--s3) var(--s4);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.hidden summary {
+		padding: var(--s4);
+		cursor: pointer;
+		border-bottom: 1px solid var(--line);
+	}
+}
+
+[data-c="post-thread"] [data-c="post-stats"] {
+	margin-block: 0;
+}
+
+/* lightbox-panel */
+@scope ([data-c="lightbox-panel"]) to ([data-c]) {
+	.post {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		padding: var(--s4);
+		border-bottom: 1px solid var(--line);
+	}
+
+	header {
+		display: flex;
+		align-items: center;
+		gap: var(--s3);
+		min-width: 0;
+	}
+
+	.who {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.handle,
+	.time {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.time {
+		align-self: flex-start;
+		text-decoration: none;
+	}
+
+	.time:hover {
+		text-decoration: underline;
+	}
+
+	.text {
+		font-size: var(--t-md);
+	}
+
+	.note {
+		padding: var(--s3) var(--s4);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.row {
+		border-bottom: 1px solid var(--line);
+	}
+}
+
+[data-c="lightbox-panel"] .who:hover [data-c="user-name"] .text {
+	text-decoration: underline;
+}
+
+[data-c="lightbox-panel"] .post [data-c="content-warning"] .text {
+	font-size: var(--t-md);
+}
+
+/* user-hover-card */
+@scope ([data-c="user-hover-card"]) to ([data-c]) {
+	:scope {
+		position: fixed;
+		inset: auto;
+		margin: 0;
+		width: min(320px, calc(100vw - 16px));
+		padding: 0;
+		overflow: hidden;
+		background: var(--surface);
+		color: var(--ink);
+		border: 1px solid var(--line-hot);
+		border-radius: var(--r-card);
+		box-shadow: 0 18px 40px -18px var(--shadow);
+	}
+
+	.banner {
+		position: relative;
+		height: 64px;
+		overflow: hidden;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.banner img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--s2);
+		padding: 0 var(--s4) var(--s4);
+	}
+
+	.top {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		align-self: stretch;
+		margin-top: calc(-1 * var(--s6));
+	}
+
+	.ring {
+		display: inline-flex;
+		border: 2px solid var(--surface);
+		background: var(--surface);
+	}
+
+	.who {
+		display: flex;
+		flex-direction: column;
+		max-width: 100%;
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.handle {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.tag {
+		padding: 0 var(--s2);
+		border: 1px solid var(--line);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+	}
+
+	.bio {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+		overflow: hidden;
+		font-size: var(--t-sm);
+	}
+
+	.counts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s3);
+		font-size: var(--t-sm);
+	}
+
+	.counts a {
+		color: var(--ink-dim);
+		text-decoration: none;
+	}
+
+	.counts a:hover {
+		text-decoration: underline;
+	}
+
+	.counts b {
+		color: var(--ink);
+	}
+}
+
+[data-c="user-hover-card"] .who:hover [data-c="user-name"] .text {
+	text-decoration: underline;
+}
+
+/* edit-post-form */
+@scope ([data-c="edit-post-form"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+	}
+
+	.note {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.text {
+		flex-shrink: 0;
+	}
+
+	.counter {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: var(--s1);
+	}
+
+	.failure {
+		color: var(--danger);
+		font-size: var(--t-sm);
+	}
+}
+
+/* edit-history */
+@scope ([data-c="edit-history"]) to ([data-c]) {
+	:scope {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+	}
+
+	li {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		padding: var(--s3) 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: var(--s2);
+	}
+
+	time {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.cw {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		color: var(--ink-dim);
+	}
+}
+
+/* report-form */
+@scope ([data-c="report-form"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+	}
+
+	fieldset {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		border: 0;
+		padding: 0;
+	}
+
+	.reason p,
+	.note {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.reason p {
+		padding-left: 32px;
+	}
+
+	.failure {
+		color: var(--danger);
+		font-size: var(--t-sm);
+	}
+}
+
+/* list-picker */
+@scope ([data-c="list-picker"]) to ([data-c]) {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		max-height: 50dvh;
+		overflow-y: auto;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+	}
+}
+
+/* post-list: the list of people or quotes inside the dialog. */
+@scope ([data-c="post-list"]) to ([data-c]) {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.entry {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.more a {
+		display: block;
+		padding: var(--s3);
+		color: var(--ink-dim);
+		text-align: center;
+	}
+}
+
+[data-c="post-thread"] .compose,
+[data-c="lightbox-panel"] .compose {
+	border-top: 1px solid var(--line);
+}
+
+[data-c="lightbox-panel"] .compose {
+	border-bottom: 1px solid var(--line);
+	border-top: 0;
+}

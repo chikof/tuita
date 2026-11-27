@@ -1,0 +1,909 @@
+/* The admin console: tabs, queues, lists, forms and dialogs. Each block is scoped to the component of the
+   same `data-c` name with @scope; markup that a nested component (a card, a dialog, a
+   field) draws around slot content sits outside the scope and names the tab explicitly. */
+
+/* admin-tabs */
+@scope ([data-c="admin-tabs"]) to ([data-c]) {
+	.strip {
+		display: flex;
+		gap: var(--s4);
+		overflow-x: auto;
+		scrollbar-width: none;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.strip::-webkit-scrollbar {
+		display: none;
+	}
+
+	a {
+		position: relative;
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0 var(--s1);
+		color: var(--ink-dim);
+		font-weight: 500;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: color var(--dur-fast) ease;
+	}
+
+	a:hover,
+	a[aria-current='page'] {
+		color: var(--ink);
+	}
+
+	a:focus-visible {
+		outline-offset: -2px;
+	}
+
+	.indicator {
+		position: absolute;
+		inset: auto 0 0;
+		height: 8px;
+		pointer-events: none;
+	}
+
+	.indicator i {
+		display: block;
+		height: 100%;
+		background: var(--ink);
+		mask-size: calc(var(--cell) * 4) 100%;
+		-webkit-mask-size: calc(var(--cell) * 4) 100%;
+		mask-repeat: repeat-x;
+		-webkit-mask-repeat: repeat-x;
+		image-rendering: pixelated;
+	}
+}
+
+/* admin-denied: the denied state of the admin page */
+[data-c="admin-denied"] {
+	padding: var(--s5) var(--s4);
+}
+
+/* admin-setting-card */
+@scope ([data-c="admin-setting-card"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		min-width: 0;
+		padding: var(--s4);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+	}
+
+	h2 {
+		font-size: var(--t-lg);
+	}
+
+	.description {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+}
+
+/* The tabs. Their cards and forms are slot content of a card, so the rules name the tab. */
+.tab[data-c^='admin-'] {
+	padding: var(--s4);
+}
+
+:is(
+		[data-c='admin-invites'],
+		[data-c='admin-announcements'],
+		[data-c='admin-emotes'],
+		[data-c='admin-filter'],
+		[data-c='admin-federation']
+	).tab {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s4);
+}
+
+:is(
+		[data-c='admin-invites'],
+		[data-c='admin-announcements'],
+		[data-c='admin-emotes'],
+		[data-c='admin-federation']
+	)
+	.form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s3);
+}
+
+:is([data-c='admin-instance'], [data-c='admin-filter']) > .form,
+:is([data-c='admin-instance'], [data-c='admin-filter']) .form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s4);
+}
+
+:is([data-c='admin-invites'], [data-c='admin-announcements']) .pair {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--s3);
+}
+
+[data-c='admin-federation'] .pair {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: var(--s3);
+}
+
+@media (max-width: 480px) {
+	:is([data-c='admin-invites'], [data-c='admin-announcements'], [data-c='admin-federation']) .pair {
+		grid-template-columns: 1fr;
+	}
+}
+
+[data-c^='admin-'].tab .end {
+	display: flex;
+	justify-content: flex-end;
+}
+
+[data-c='admin-instance'] .end {
+	align-items: center;
+	gap: var(--s4);
+}
+
+[data-c^='admin-'].tab .error {
+	color: var(--danger);
+	font-size: var(--t-sm);
+}
+
+[data-c^='admin-'].tab .error[hidden] {
+	display: none;
+}
+
+[data-c^='admin-'].tab .dim {
+	color: var(--ink-dim);
+	font-size: var(--t-sm);
+}
+
+[data-c^='admin-'].tab h3 {
+	font-family: var(--font-mono);
+	font-size: var(--t-xs);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--ink-dim);
+	font-weight: 400;
+}
+
+:is(
+		[data-c='admin-invites'],
+		[data-c='admin-announcements'],
+		[data-c='admin-emotes']
+	)
+	.items {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* admin-instance */
+[data-c='admin-instance'] .modes {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s3);
+}
+
+[data-c='admin-instance'] .mode {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s1);
+}
+
+[data-c='admin-instance'] .hint {
+	color: var(--ink-dim);
+	font-size: var(--t-sm);
+}
+
+[data-c='admin-instance'] .mode .hint {
+	padding-left: calc(var(--s3) + 24px);
+}
+
+[data-c='admin-instance'] .preview {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	color: var(--ink);
+	text-decoration: underline;
+}
+
+/* admin-invites */
+[data-c='admin-invites'] .items li {
+	display: flex;
+	align-items: center;
+	gap: var(--s2);
+	padding-block: var(--s3);
+	border-top: 1px solid var(--line);
+}
+
+[data-c='admin-invites'] .text {
+	flex: 1;
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+
+[data-c='admin-invites'] .head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--s2);
+}
+
+[data-c='admin-invites'] code {
+	font-family: var(--font-mono);
+	font-size: var(--t-md);
+	letter-spacing: 0.08em;
+}
+
+[data-c='admin-invites'] .dead code {
+	color: var(--ink-dim);
+	text-decoration: line-through;
+}
+
+/* admin-announcements */
+[data-c='admin-announcements'] .items li {
+	display: flex;
+	align-items: center;
+	gap: var(--s3);
+	padding-block: var(--s3);
+	border-top: 1px solid var(--line);
+}
+
+[data-c='admin-announcements'] .icon {
+	display: inline-grid;
+	flex: none;
+}
+
+[data-c='admin-announcements'] .text {
+	flex: 1;
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+
+/* admin-emotes */
+[data-c='admin-emotes'] .file {
+	display: flex;
+	align-items: center;
+	gap: var(--s3);
+}
+
+[data-c='admin-emotes'] .preview {
+	display: grid;
+	place-items: center;
+	flex: none;
+	width: 48px;
+	height: 48px;
+	border: 1px dashed var(--line);
+	border-radius: var(--r-ctl);
+}
+
+[data-c='admin-emotes'] .preview img {
+	max-width: 32px;
+	max-height: 32px;
+	object-fit: contain;
+}
+
+[data-c='admin-emotes'] .pick {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--s2);
+	min-width: 0;
+}
+
+[data-c='admin-emotes'] .dim {
+	overflow-wrap: anywhere;
+}
+
+[data-c='admin-emotes'] .dim.bad {
+	color: var(--danger);
+}
+
+[data-c='admin-emotes'] .items li {
+	display: grid;
+	grid-template-columns: 32px minmax(0, 1fr) minmax(0, 10rem) auto;
+	align-items: center;
+	gap: var(--s3);
+	padding-block: var(--s3);
+	border-top: 1px solid var(--line);
+}
+
+[data-c='admin-emotes'] .thumb {
+	width: auto;
+	max-width: 32px;
+	height: 32px;
+	object-fit: contain;
+}
+
+[data-c='admin-emotes'] code {
+	overflow-wrap: anywhere;
+}
+
+[data-c='admin-emotes'] .cat {
+	min-width: 0;
+	min-height: 44px;
+	padding: var(--s2) var(--s3);
+	background: transparent;
+	border: 1px solid var(--line);
+	border-radius: var(--r-ctl);
+	outline: none;
+	transition: border-color var(--dur-fast) ease;
+}
+
+[data-c='admin-emotes'] .cat:hover:not(:disabled),
+[data-c='admin-emotes'] .cat:focus-visible {
+	border-color: var(--ink);
+}
+
+[data-c='admin-emotes'] .cat::placeholder {
+	color: var(--ink-dim);
+}
+
+@media (max-width: 480px) {
+	[data-c='admin-emotes'] .items li {
+		grid-template-columns: 32px minmax(0, 1fr) auto;
+	}
+
+	[data-c='admin-emotes'] .cat {
+		grid-column: 1 / -1;
+		grid-row: 2;
+	}
+}
+
+/* admin-filter */
+[data-c='admin-filter'] .ok {
+	color: var(--ink-dim);
+}
+
+[data-c='admin-filter'] .hits {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: 1px solid var(--line);
+	border-radius: var(--r-card);
+	overflow: hidden;
+}
+
+[data-c='admin-filter'] .hits li + li {
+	border-top: 1px solid var(--line);
+}
+
+/* admin-federation */
+[data-c='admin-federation'] .blocks {
+	display: flex;
+	flex-direction: column;
+}
+
+/* admin-actor-key */
+@scope ([data-c="admin-actor-key"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		margin: 0;
+	}
+
+	dt {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+	}
+
+	dd {
+		margin: var(--s1) 0 0;
+		min-width: 0;
+	}
+
+	code {
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+	}
+
+	.print {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--s2);
+	}
+
+	.print code {
+		flex: 1;
+		min-width: 0;
+		letter-spacing: 0.04em;
+		line-height: 1.5;
+	}
+}
+
+/* admin-queue-summary */
+@scope ([data-c="admin-queue-summary"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+	}
+
+	.head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s3);
+	}
+
+	.numbers {
+		min-width: 0;
+	}
+
+	.count {
+		font-weight: 600;
+	}
+
+	h3 {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+		font-weight: 400;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.failing {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+		padding-block: var(--s3);
+		border-top: 1px solid var(--line);
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.line {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: var(--s1) var(--s2);
+	}
+
+	code {
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+	}
+
+	.domain {
+		font-weight: 600;
+	}
+
+	.error {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		font-size: var(--t-sm);
+	}
+
+	.label {
+		color: var(--ink-dim);
+		font-size: var(--t-xs);
+	}
+}
+
+/* admin-domain-block-row */
+@scope ([data-c="admin-domain-block-row"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: var(--s3);
+		padding-block: var(--s3);
+		border-top: 1px solid var(--line);
+	}
+
+	.text {
+		flex: 1 1 14rem;
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.domain code {
+		font-family: var(--font-mono);
+		font-weight: 600;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.controls {
+		display: flex;
+		align-items: flex-end;
+		gap: var(--s2);
+		flex: 0 1 auto;
+	}
+
+	@media (max-width: 480px) {
+		.controls {
+			flex: 1 1 100%;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	[data-c='admin-domain-block-row'] .controls .field {
+		flex: 1;
+	}
+}
+
+/* admin-reports and admin-users, and the infinite lists they hold */
+:is([data-c='admin-reports'], [data-c='admin-users'], [data-c='admin-audit']) .list > [role='listitem'] {
+	border-bottom: 1px solid var(--line);
+}
+
+:is([data-c='admin-reports'], [data-c='admin-users']) > .tab {
+	padding: var(--s4);
+}
+
+:is([data-c='admin-reports'], [data-c='admin-users']) .more {
+	display: flex;
+	justify-content: center;
+	padding: var(--s4);
+}
+
+[data-c='admin-users'] .controls {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--s3);
+}
+
+@media (min-width: 600px) {
+	[data-c='admin-users'] .controls {
+		grid-template-columns: 2fr 1fr;
+	}
+}
+
+/* admin-audit */
+@scope ([data-c="admin-audit"]) to ([data-c]) {
+	.entry {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--s3);
+		padding: var(--s3) var(--s4);
+	}
+
+	.icon {
+		display: inline-grid;
+		flex: none;
+		padding-top: 2px;
+	}
+
+	.text {
+		flex: 1;
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.what {
+		font-weight: 600;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+}
+
+/* The link that is the next page of the audit log when no script follows it. */
+[data-c='admin-audit'] a[data-more] {
+	display: block;
+	padding: var(--s4);
+	color: var(--ink-dim);
+	text-align: center;
+}
+
+/* admin-report-card */
+@scope ([data-c="admin-report-card"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		padding: var(--s4);
+		min-width: 0;
+	}
+
+	header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s2) var(--s3);
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+	}
+
+	.target {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s2);
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.target:hover .dim {
+		text-decoration: underline;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s1) var(--s2);
+	}
+
+	.tags:empty {
+		display: none;
+	}
+
+	blockquote {
+		margin: 0;
+		padding-left: var(--s3);
+		border-left: 2px solid var(--line-hot);
+		overflow-wrap: anywhere;
+		white-space: pre-wrap;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s2);
+	}
+}
+
+/* admin-post-preview */
+@scope ([data-c="admin-post-preview"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		padding: var(--s3);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		min-width: 0;
+	}
+
+	.head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s2);
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	a.dim {
+		text-decoration: none;
+	}
+
+	a.dim:hover {
+		text-decoration: underline;
+	}
+
+	.text {
+		overflow-wrap: anywhere;
+		white-space: pre-wrap;
+	}
+}
+
+/* admin-user-row */
+@scope ([data-c="admin-user-row"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		padding-right: var(--s2);
+	}
+
+	.main {
+		position: relative;
+		overflow: hidden;
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		align-items: flex-start;
+		gap: var(--s3);
+		padding: var(--s3) var(--s4);
+		background: transparent;
+		border: 0;
+		color: var(--ink);
+		text-align: left;
+	}
+
+	.text {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+	}
+
+	.line {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: var(--s1) var(--s2);
+	}
+
+	.handle,
+	.facts {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s1) var(--s2);
+	}
+
+	.tags:empty {
+		display: none;
+	}
+
+	.note {
+		color: var(--ink);
+	}
+}
+
+/* menu: the trigger inside the menu button */
+[data-c='menu'] .trigger > .more {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 40px;
+}
+
+@media (pointer: coarse) {
+	[data-c='menu'] .trigger > .more {
+		min-width: 44px;
+		min-height: 44px;
+	}
+}
+
+/* admin-rename-form */
+@scope ([data-c="admin-rename-form"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s4);
+	}
+
+	.note {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.error {
+		color: var(--danger);
+		font-size: var(--t-sm);
+	}
+
+	.error[hidden] {
+		display: none;
+	}
+}
+
+/* admin-user-detail */
+@scope ([data-c="admin-user-detail"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s4);
+		min-width: 0;
+	}
+
+	.head {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--s3);
+	}
+
+	.who {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s1) var(--s2);
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+	}
+
+	.bio {
+		overflow-wrap: anywhere;
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+		gap: var(--s2);
+	}
+
+	.stats div {
+		display: flex;
+		flex-direction: column;
+		padding: var(--s2) var(--s3);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+	}
+
+	dd {
+		order: 1;
+		margin: 0;
+		font-family: var(--font-pixel);
+		font-size: var(--t-xl);
+	}
+
+	dt {
+		order: 2;
+		color: var(--ink-dim);
+		font-size: var(--t-xs);
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	h3 {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+	}
+
+	.item {
+		display: flex;
+		flex-direction: column;
+		padding-block: var(--s2);
+		border-bottom: 1px solid var(--line);
+		overflow-wrap: anywhere;
+	}
+}

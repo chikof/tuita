@@ -1,0 +1,13 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "actor": "https://gts.example/users/ada",
+  "id": "https://gts.example/users/ada/follows/01H0FOLLOW000000000000000A/accept",
+  "object": {
+    "actor": "https://social.example/users/bea",
+    "id": "https://social.example/activities/0192a4b6-7c3e-7f10-9a42-3d5c8e1f2a08",
+    "object": "https://gts.example/users/ada",
+    "type": "Follow"
+  },
+  "to": "https://social.example/users/bea",
+  "type": "Accept"
+}

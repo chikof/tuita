@@ -1,0 +1,710 @@
+
+@scope ([data-c="video-player"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		container: player / inline-size;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background: #000;
+		color: var(--ink);
+	}
+
+	:scope:focus-visible {
+		outline: 2px solid var(--ink);
+		outline-offset: -2px;
+	}
+
+	:scope.quiet {
+		cursor: none;
+	}
+
+	video {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: var(--fit);
+		background: #000;
+	}
+
+	:scope:fullscreen video {
+		object-fit: contain;
+	}
+
+	/* The chrome only exists once video.js has taken over; before that the native controls show. */
+	.chip,
+	.big,
+	.failed,
+	.bar {
+		display: none;
+	}
+
+	.chip,
+	.big {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		place-items: center;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		color: var(--ink);
+	}
+
+	:scope.live.loading .chip,
+	:scope.live.big .big {
+		display: grid;
+	}
+
+	.chip {
+		padding: var(--s3);
+		pointer-events: none;
+	}
+
+	.big {
+		overflow: hidden;
+		width: 64px;
+		height: 64px;
+		padding: 0;
+		border-color: var(--line-hot);
+	}
+
+	.failed {
+		position: absolute;
+		inset: 0;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--s3);
+		padding: var(--s4);
+		background: var(--surface);
+		text-align: center;
+		font-size: var(--t-sm);
+	}
+
+	:scope.live.failed .failed {
+		display: flex;
+	}
+
+	.bar {
+		position: absolute;
+		inset: auto 0 0;
+		align-items: center;
+		gap: var(--s2);
+		padding: var(--s1) var(--s2);
+		background: var(--surface);
+		border-top: 1px solid var(--line);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity var(--dur-fast) steps(3);
+	}
+
+	:scope.live:not(.failed) .bar {
+		display: flex;
+	}
+
+	.bar.shown,
+	.bar:hover,
+	:scope:has(:focus-visible) .bar {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.time {
+		flex: none;
+		font-family: var(--font-pixel);
+		font-size: var(--t-xs);
+		font-variant-numeric: tabular-nums;
+		letter-spacing: 0.06em;
+		white-space: nowrap;
+	}
+
+	.scrub {
+		flex: 1;
+		min-width: 48px;
+		height: 32px;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		touch-action: none;
+	}
+
+	.scrub.off {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	.scrub:focus-visible {
+		outline: 2px solid var(--ink);
+		outline-offset: 2px;
+	}
+
+	.rail {
+		position: relative;
+		width: 100%;
+		height: 10px;
+		border: 1px solid var(--line);
+		overflow: hidden;
+	}
+
+	.buffer,
+	.fill {
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 0;
+		background: var(--ink);
+		image-rendering: pixelated;
+	}
+
+	.buffer {
+		mask-image: var(--buffer-mask);
+		-webkit-mask-image: var(--buffer-mask);
+		mask-size: calc(var(--cell) * 4);
+		-webkit-mask-size: calc(var(--cell) * 4);
+	}
+
+	.fill {
+		mask-image: var(--fill-mask);
+		-webkit-mask-image: var(--fill-mask);
+		mask-size: calc(var(--cell) * 4);
+		-webkit-mask-size: calc(var(--cell) * 4);
+		border-right: 2px solid var(--ink);
+	}
+
+	.vol {
+		--pct: 100%;
+		position: relative;
+		display: none;
+		align-items: center;
+		flex: none;
+		width: 72px;
+		height: 24px;
+	}
+
+	.vrail {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 10px;
+		border: 1px solid var(--line);
+		overflow: hidden;
+	}
+
+	.vrail i {
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: var(--pct);
+		background: var(--ink);
+		mask-image: var(--fill-mask);
+		-webkit-mask-image: var(--fill-mask);
+		mask-size: calc(var(--cell) * 4);
+		-webkit-mask-size: calc(var(--cell) * 4);
+		image-rendering: pixelated;
+		border-right: 2px solid var(--ink);
+	}
+
+	.vol input {
+		position: relative;
+		width: 100%;
+		height: 24px;
+		margin: 0;
+		appearance: none;
+		-webkit-appearance: none;
+		background: transparent;
+		cursor: pointer;
+	}
+
+	.vol input::-webkit-slider-runnable-track {
+		height: 24px;
+		background: transparent;
+	}
+	.vol input::-moz-range-track {
+		height: 24px;
+		background: transparent;
+	}
+
+	.vol input::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		width: 8px;
+		height: 24px;
+		background: var(--ink);
+		border: 0;
+		border-radius: 0;
+	}
+	.vol input::-moz-range-thumb {
+		width: 8px;
+		height: 24px;
+		background: var(--ink);
+		border: 0;
+		border-radius: 0;
+	}
+
+	.vol input:focus-visible {
+		outline: 2px solid var(--ink);
+		outline-offset: 2px;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.vol {
+			display: flex;
+		}
+	}
+
+	@container player (max-width: 419px) {
+		.vol {
+			display: none;
+		}
+	}
+}
+
+/* Nested components (icon buttons, the menu trigger) sit behind the scope limit, so their rules live outside it.
+   Each toggle is rendered in both states; the root's state classes pick one. */
+[data-c="video-player"] [data-state="playing"],
+[data-c="video-player"] [data-state="loud"],
+[data-c="video-player"] [data-state="in"] {
+	display: none;
+}
+
+[data-c="video-player"]:not(.paused) [data-state="paused"],
+[data-c="video-player"].muted [data-state="loud"],
+[data-c="video-player"]:not(.muted) [data-state="muted"],
+[data-c="video-player"].pip [data-state="out"][data-act="pip"],
+[data-c="video-player"].fs [data-state="out"][data-act="fullscreen"] {
+	display: none;
+}
+
+[data-c="video-player"]:not(.paused) [data-state="playing"],
+[data-c="video-player"]:not(.muted) [data-state="loud"],
+[data-c="video-player"].pip [data-state="in"][data-act="pip"],
+[data-c="video-player"].fs [data-state="in"][data-act="fullscreen"] {
+	display: inline-grid;
+}
+
+[data-c="video-player"]:not(.can-pip) [data-act="pip"],
+[data-c="video-player"]:not(.can-fs) [data-act="fullscreen"] {
+	display: none;
+}
+
+[data-c="video-player"] .speed {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--s1);
+	min-width: 32px;
+	height: 32px;
+	padding: 0 var(--s1);
+	border: 1px solid var(--line);
+	border-radius: var(--r-ctl);
+}
+
+[data-c="video-player"] .rate {
+	font-family: var(--font-pixel);
+	font-size: var(--t-xs);
+	letter-spacing: 0.04em;
+}
+
+[data-c="video-player"] .rate:empty {
+	display: none;
+}
+
+@media (pointer: coarse) {
+	[data-c="video-player"] .speed {
+		min-width: 44px;
+		height: 44px;
+	}
+}
+
+/* media-grid. Above the card's hover wash: photos are never dithered. */
+@scope ([data-c="media-grid"]) to ([data-c]) {
+	:scope.frame,
+	:scope.carousel {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		max-height: 560px;
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		overflow: hidden;
+		background: var(--surface);
+	}
+
+	/* The group role sits here: above the card's hover wash, under the pager and arrows. */
+	.track {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		gap: 2px;
+		overflow-x: auto;
+		overflow-y: hidden;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.track:focus-visible {
+		outline: 2px solid var(--ink);
+		outline-offset: -2px;
+	}
+
+	.cell {
+		position: relative;
+		flex: none;
+		height: 100%;
+		min-width: 0;
+		min-height: 0;
+		overflow: hidden;
+		scroll-snap-align: start;
+	}
+
+	:scope.frame {
+		display: grid;
+	}
+
+	.cell.fill {
+		width: 100%;
+	}
+
+	.skeleton {
+		position: absolute;
+		inset: 0;
+	}
+
+	.skeleton[hidden] {
+		display: none;
+	}
+
+	.open {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		background: transparent;
+		border: 0;
+		cursor: zoom-in;
+	}
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		image-rendering: auto;
+	}
+
+	.alt,
+	.pager {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+		padding: 2px var(--s2);
+		background: var(--paper);
+		color: var(--ink);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		pointer-events: none;
+	}
+
+	.alt {
+		position: absolute;
+		left: var(--s2);
+		bottom: var(--s2);
+	}
+
+	.pager {
+		z-index: 2;
+		position: absolute;
+		top: var(--s2);
+		right: var(--s2);
+		font-family: var(--font-pixel);
+	}
+
+	.nav {
+		z-index: 2;
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		opacity: 0;
+		background: var(--paper);
+		border-radius: var(--r-ctl);
+		transition: opacity var(--dur-fast) ease;
+	}
+
+	.pager[hidden],
+	.nav[hidden] {
+		display: none;
+	}
+
+	.nav:focus-within {
+		opacity: 1;
+	}
+
+	.prev {
+		left: var(--s2);
+	}
+
+	.next {
+		right: var(--s2);
+	}
+
+	@media (hover: hover) {
+		:scope.carousel:hover .nav {
+			opacity: 1;
+		}
+	}
+
+	/* Touch scrolls by swipe; the arrows only get in the way. */
+	@media (pointer: coarse) {
+		.nav {
+			display: none;
+		}
+	}
+}
+
+/* sensitive-cover: post.js flips the `shown` class, `inert` and the hidden parts. */
+@scope ([data-c="sensitive-cover"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		z-index: 1;
+		border-radius: var(--r-ctl);
+		overflow: hidden;
+	}
+
+	.content {
+		transition: filter var(--dur-fast) var(--ease);
+	}
+
+	:scope:not(.shown) .content {
+		filter: blur(24px);
+	}
+
+	.veil {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+	}
+
+	.veil[hidden] {
+		display: none;
+	}
+
+	.prompt {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s2);
+		padding: var(--s3) var(--s4);
+		background: var(--paper);
+		border: 1px solid var(--line-hot);
+		border-radius: var(--r-ctl);
+		text-align: center;
+	}
+
+	.note {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.hide {
+		position: absolute;
+		top: var(--s2);
+		left: var(--s2);
+		background: var(--paper);
+		border-radius: var(--r-ctl);
+	}
+
+	.hide[hidden] {
+		display: none;
+	}
+}
+
+[data-c="sensitive-cover"] .veil [data-c="dither-fill"] {
+	position: absolute;
+	inset: 0;
+	--fill: var(--paper);
+}
+
+/* lightbox: one <dialog> with every slide; lightbox.js shows the current one. */
+@scope ([data-c="lightbox"]) to ([data-c]) {
+	:scope {
+		width: 100vw;
+		height: 100dvh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: var(--paper);
+		color: var(--ink);
+	}
+
+	:scope::backdrop {
+		background: var(--paper);
+	}
+
+	.frame {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		height: 100%;
+	}
+
+	.main {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		min-height: 0;
+		gap: var(--s2);
+		padding: var(--s3);
+		background: var(--surface);
+	}
+
+	.side {
+		min-height: 0;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		border-left: 1px solid var(--line);
+		background: var(--paper);
+	}
+
+	.frame:not(.panel) .side {
+		display: none;
+	}
+
+	.top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s2);
+		min-height: 44px;
+	}
+
+	.count {
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		letter-spacing: 0.12em;
+		color: var(--ink-dim);
+	}
+
+	.view {
+		display: inline-flex;
+		align-items: center;
+		min-height: 40px;
+		padding: 0 var(--s3);
+		background: var(--paper);
+		color: var(--ink);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		letter-spacing: 0.12em;
+		text-decoration: none;
+	}
+
+	.view:hover {
+		border-color: var(--line-hot);
+	}
+
+	.stage {
+		position: relative;
+		flex: 1;
+		min-height: 0;
+		display: grid;
+		place-items: center;
+		container-type: size;
+		touch-action: pan-y;
+	}
+
+	.slide {
+		display: contents;
+	}
+
+	.slide[hidden] {
+		display: none;
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+		image-rendering: auto;
+	}
+
+	/* The player fills its parent, so the box gets the video's shape within the stage. */
+	.video {
+		width: min(100cqw, 100cqh * var(--ar));
+		aspect-ratio: var(--ar);
+	}
+
+	.prev,
+	.next {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		z-index: 1;
+		background: var(--paper);
+		border-radius: var(--r-ctl);
+	}
+
+	.prev {
+		left: var(--s2);
+	}
+
+	.next {
+		right: var(--s2);
+	}
+
+	.caption {
+		max-width: 70ch;
+		max-height: 20dvh;
+		margin: 0 auto;
+		padding: var(--s2) var(--s3);
+		overflow: auto;
+		background: var(--paper);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+	}
+
+	.caption[hidden] {
+		display: none;
+	}
+
+	/* The side panel needs room; below this the stage gets the whole screen and a link to the
+	   post replaces the panel toggle. */
+	@media (min-width: 1100px) {
+		.frame.panel {
+			grid-template-columns: minmax(0, 1fr) 380px;
+		}
+
+		.view {
+			display: none;
+		}
+	}
+
+	@media (max-width: 1099.98px) {
+		.side,
+		.toggle {
+			display: none;
+		}
+	}
+}
+
+[data-c="lightbox"] .frame:not(.panel) .toggle svg {
+	transform: scaleX(-1);
+}

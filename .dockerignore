@@ -1,0 +1,12 @@
+target/
+.git/
+.devenv/
+.direnv/
+.env
+docs/
+scripts/
+.agents/
+*.md
+Dockerfile
+.dockerignore
+crates/*/tests/

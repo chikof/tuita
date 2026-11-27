@@ -1,0 +1,17 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada/articles/rust-in-the-woods",
+  "type": "Article",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "name": "Rust in the woods",
+  "summary": "<p>A short essay.</p>",
+  "content": "<p>Long form text, first paragraph.</p><p>Second paragraph.</p>",
+  "published": "2026-11-07T07:00:00Z",
+  "url": [
+    {"type": "Link", "mediaType": "text/plain", "href": "https://mastodon.example/articles/rust-in-the-woods.txt"},
+    {"type": "Link", "mediaType": "text/html", "href": "https://mastodon.example/articles/rust-in-the-woods"}
+  ],
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/users/ada/followers"],
+  "attachment": {"type": "Image", "mediaType": "image/jpeg", "url": "https://mastodon.example/articles/rust-in-the-woods/cover.jpg", "name": "Cover"}
+}

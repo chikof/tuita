@@ -1,0 +1,51 @@
+{
+  "@context": [
+    "https://gotosocial.org/ns",
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "discoverable": "toot:discoverable",
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "toot": "http://joinmastodon.org/ns#",
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "Emoji": "toot:Emoji"
+    }
+  ],
+  "attachment": [
+    {"name": "pronouns", "type": "PropertyValue", "value": "they/them"},
+    {"name": "website", "type": "PropertyValue", "value": "<a href=\"https://ada.example/\" rel=\"nofollow noreferrer noopener\" target=\"_blank\">ada.example</a>"},
+    {"name": "age", "type": "PropertyValue", "value": "120"}
+  ],
+  "discoverable": true,
+  "featured": "https://gts.example/users/ada/collections/featured",
+  "followers": "https://gts.example/users/ada/followers",
+  "following": "https://gts.example/users/ada/following",
+  "hidesCcPublicFromUnauthedWeb": true,
+  "hidesToPublicFromUnauthedWeb": false,
+  "icon": {"mediaType": "image/jpeg", "type": "Image", "url": "https://gts.example/fileserver/01H0AVATAR0000000000000000/avatar/original/01H0AVATAR0000000000000001.jpg"},
+  "id": "https://gts.example/users/ada",
+  "image": {"mediaType": "image/png", "type": "Image", "url": "https://gts.example/fileserver/01H0AVATAR0000000000000000/header/original/01H0HEADER000000000000000A.png"},
+  "inbox": "https://gts.example/users/ada/inbox",
+  "manuallyApprovesFollowers": false,
+  "name": "ada :rainbow:",
+  "outbox": "https://gts.example/users/ada/outbox",
+  "preferredUsername": "ada",
+  "publicKey": {
+    "id": "https://gts.example/users/ada#main-key",
+    "owner": "https://gts.example/users/ada",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtUdm+hegOnsMD/6GMwpP\n+9ljM+kKx1OZJZZE+AQEL+Pr6dmOOcZ9jYxzV6mfwuBqP69Sq/v5eNx0oApi0AiV\n8WFX/4CdOi17iaAzF1T+xh0Mw1jt5K+YQCLxKHiEezupJSVeWrzd3dfIiMYGFnsN\nInfPg5ato60ntrDESSUXy5Rqu9tqzMMtS1XSzJnFi63zJZUWIItrAqEh+Ez93ui4\nbT6a9bJpy+vua9XdK/+Pyz8811h6Otbpqtx0+xaltNz31xrKqW4LUQ+1y+XCwM1x\n7z5Jze8rmmoBHDMnb+K5VQZhPMN+umh0X6r3Lr1voHUfJo9wKShLKCUakLCZfdQT\newIDAQAB\n-----END PUBLIC KEY-----\n"
+  },
+  "published": "2022-09-29T13:57:24Z",
+  "summary": "<p>i post about things that concern me</p>",
+  "tag": {
+    "icon": {"mediaType": "image/png", "type": "Image", "url": "https://gts.example/fileserver/01H0AVATAR0000000000000000/emoji/original/01F8MH9H8E4VG3KDYJR9EGPXCQ.png"},
+    "id": "https://gts.example/emoji/01F8MH9H8E4VG3KDYJR9EGPXCQ",
+    "name": ":rainbow:",
+    "type": "Emoji",
+    "updated": "2021-09-20T10:40:37Z"
+  },
+  "type": "Person",
+  "url": "https://gts.example/@ada"
+}

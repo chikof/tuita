@@ -1,0 +1,15 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", "https://w3id.org/security/v1", {"Key": "sec:Key", "manuallyApprovesFollowers": "as:manuallyApprovesFollowers", "sensitive": "as:sensitive", "Hashtag": "as:Hashtag", "quoteUrl": "as:quoteUrl", "fedibird": "http://fedibird.com/ns#", "quoteUri": "fedibird:quoteUri", "toot": "http://joinmastodon.org/ns#", "Emoji": "toot:Emoji", "featured": "toot:featured", "discoverable": "toot:discoverable", "indexable": "toot:indexable", "schema": "http://schema.org#", "PropertyValue": "schema:PropertyValue", "value": "schema:value", "misskey": "https://misskey-hub.net/ns#", "isCat": "misskey:isCat", "_misskey_content": "misskey:_misskey_content", "_misskey_quote": "misskey:_misskey_quote", "_misskey_reaction": "misskey:_misskey_reaction", "_misskey_votes": "misskey:_misskey_votes", "_misskey_summary": "misskey:_misskey_summary", "_misskey_license": "misskey:_misskey_license", "_misskey_followedMessage": "misskey:_misskey_followedMessage", "_misskey_requireSigninToViewContents": "misskey:_misskey_requireSigninToViewContents", "_misskey_makeNotesFollowersOnlyBefore": "misskey:_misskey_makeNotesFollowersOnlyBefore", "_misskey_makeNotesHiddenBefore": "misskey:_misskey_makeNotesHiddenBefore", "freeText": "misskey:freeText", "vcard": "http://www.w3.org/2006/vcard/ns#"}],
+  "id": "https://misskey.example/notes/9a0noteid002",
+  "type": "Note",
+  "attributedTo": "https://misskey.example/users/9a0example01",
+  "summary": "Mildly spicy opinions",
+  "content": "<p><span>Pineapple belongs on pizza.</span></p>",
+  "published": "2026-11-08T09:15:00.000Z",
+  "to": ["https://misskey.example/users/9a0example01/followers"],
+  "cc": ["https://www.w3.org/ns/activitystreams#Public"],
+  "inReplyTo": null,
+  "attachment": [],
+  "sensitive": true,
+  "tag": []
+}

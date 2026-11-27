@@ -1,0 +1,245 @@
+/* The privacy policy, the terms and the developer docs. Owner: W4f. */
+
+/* A guest sees these on a page of their own: the brand, then the document. */
+[data-c='doc-page'],
+[data-c='developers-page'] {
+	max-width: 680px;
+	margin-inline: auto;
+	padding: var(--s5) var(--s4) var(--s7);
+}
+
+[data-c='developers-page'] {
+	max-width: 820px;
+}
+
+[data-c='doc-page'] > header,
+[data-c='developers-page'] > header {
+	margin-bottom: var(--s5);
+}
+
+[data-c='doc-page'] .home,
+[data-c='developers-page'] .home {
+	display: inline-flex;
+	min-height: 44px;
+	align-items: center;
+	color: var(--ink);
+	text-decoration: none;
+}
+
+@scope ([data-c="doc-article"]) to ([data-c]) {
+	:scope {
+		padding: var(--s4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		overflow-wrap: anywhere;
+	}
+
+	h1 {
+		font-family: var(--font-pixel);
+		font-size: var(--t-2xl, 2rem);
+	}
+
+	h2 {
+		font-size: var(--t-lg);
+		margin-top: var(--s4);
+		margin-bottom: var(--s2);
+	}
+
+	section p + p,
+	section ul + p,
+	section ol + p,
+	section p + ul,
+	section p + ol {
+		margin-top: var(--s3);
+	}
+
+	.updated {
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		color: var(--ink-dim);
+	}
+
+	ul,
+	ol {
+		padding-left: var(--s5);
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	ul {
+		list-style: square;
+	}
+
+	a {
+		color: var(--ink);
+		text-decoration: underline;
+	}
+
+	.see {
+		margin-top: var(--s5);
+	}
+}
+
+@scope ([data-c="developers"]) to ([data-c]) {
+	:scope {
+		padding: var(--s4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		min-width: 0;
+		overflow-wrap: break-word;
+	}
+
+	h1 {
+		font-family: var(--font-pixel);
+		font-size: var(--t-2xl);
+	}
+
+	h2 {
+		font-size: var(--t-lg);
+		margin-top: var(--s4);
+		margin-bottom: var(--s2);
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		min-width: 0;
+	}
+
+	.updated {
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		color: var(--ink-dim);
+	}
+
+	ul,
+	ol {
+		padding-left: var(--s5);
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	ul {
+		list-style: square;
+	}
+
+	a {
+		color: var(--ink);
+		text-decoration: underline;
+	}
+
+	code {
+		font-family: var(--font-mono);
+		font-size: 0.92em;
+	}
+
+	pre {
+		margin: 0;
+		padding: var(--s3);
+		overflow-x: auto;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-size: var(--t-sm);
+		line-height: 1.5;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: var(--t-sm);
+	}
+
+	th,
+	td {
+		padding: var(--s2) var(--s3);
+		border-bottom: 1px solid var(--line);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	th {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+		font-weight: 500;
+	}
+
+	.method,
+	.scope {
+		white-space: nowrap;
+	}
+
+	.method {
+		font-family: var(--font-mono);
+		letter-spacing: 0.08em;
+	}
+
+	/* Paths stay whole while there is room; the phone layout lets them break at slashes. */
+	.path code {
+		white-space: nowrap;
+	}
+
+	@media (max-width: 640px) {
+		table,
+		tbody {
+			display: block;
+		}
+
+		thead {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip-path: inset(50%);
+		}
+
+		tr {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: baseline;
+			gap: var(--s1) var(--s3);
+			padding-block: var(--s3);
+			border-bottom: 1px solid var(--line);
+		}
+
+		td {
+			display: block;
+			padding: 0;
+			border: 0;
+		}
+
+		.method {
+			order: 1;
+		}
+
+		.scope {
+			order: 2;
+			margin-left: auto;
+			font-family: var(--font-mono);
+			color: var(--ink-dim);
+		}
+
+		.path {
+			order: 3;
+			flex-basis: 100%;
+		}
+
+		.path code {
+			white-space: normal;
+			overflow-wrap: anywhere;
+		}
+
+		.what {
+			order: 4;
+			flex-basis: 100%;
+		}
+	}
+}

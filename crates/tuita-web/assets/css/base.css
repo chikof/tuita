@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-sans);
+	font-size: var(--t-md);
+	line-height: 1.5;
+	min-height: 100vh;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--font-pixel);
+	font-weight: 400;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+}
+
+h1 {
+	font-size: var(--t-2xl);
+}
+h2 {
+	font-size: var(--t-xl);
+}
+h3 {
+	font-size: var(--t-lg);
+}
+
+a {
+	color: var(--ink);
+	text-underline-offset: 3px;
+}
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 2px;
+}
+
+::selection {
+	background: var(--ink);
+	color: var(--paper);
+}
+
+.mono-tag {
+	font-family: var(--font-mono);
+	font-size: var(--t-xs);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--ink-dim);
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+[data-motion='reduce'] *,
+[data-motion='reduce'] *::before,
+[data-motion='reduce'] *::after {
+	animation: none !important;
+	transition: none !important;
+	scroll-behavior: auto !important;
+}
+
+@media (pointer: coarse) {
+	button,
+	[role='tab'],
+	[role='menuitem'],
+	[role='switch'],
+	[role='radio'],
+	[role='checkbox'],
+	input[type='range'] {
+		min-height: 44px;
+	}
+}
+
+/* Last resort for popovers and menus anchored near the right edge of a narrow screen. */
+@position-try --pin-right {
+	left: auto;
+	right: 8px;
+}

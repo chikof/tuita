@@ -1,0 +1,72 @@
+/* The only global dither classes. Everything else is a component. */
+
+.checker {
+	background-image: conic-gradient(
+		var(--ink) 25%,
+		transparent 0 50%,
+		var(--ink) 0 75%,
+		transparent 0
+	);
+	background-size: 4px 4px;
+	image-rendering: pixelated;
+}
+
+/* Page grain: add to <body> on loud pages only (landing, 404, auth). It spans the whole document height. */
+.grain {
+	position: relative;
+}
+
+.grain::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;
+	background-image: conic-gradient(
+		var(--ink) 25%,
+		transparent 0 50%,
+		var(--ink) 0 75%,
+		transparent 0
+	);
+	background-size: 4px 4px;
+	opacity: var(--grain-opacity);
+	animation: grain-shift 0.6s steps(2) infinite;
+}
+
+@keyframes grain-shift {
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 2px 2px;
+	}
+	100% {
+		background-position: 0 0;
+	}
+}
+
+/* Hover wash: the host needs position:relative and overflow:hidden; it rises from the bottom. */
+.wash::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: conic-gradient(
+		var(--wash, var(--ink)) 25%,
+		transparent 0 50%,
+		var(--wash, var(--ink)) 0 75%,
+		transparent 0
+	);
+	background-size: 4px 4px;
+	opacity: 0;
+	transform: translateY(100%);
+	transition:
+		opacity 0.5s ease,
+		transform 0.6s var(--ease);
+	pointer-events: none;
+}
+
+.wash:hover::after,
+.wash:focus-visible::after {
+	opacity: 0.05;
+	transform: translateY(0);
+}

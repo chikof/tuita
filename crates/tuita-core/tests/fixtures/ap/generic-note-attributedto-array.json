@@ -1,0 +1,15 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"sensitive": "as:sensitive"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000020",
+  "type": "Note",
+  "attributedTo": [
+    {"type": "Person", "id": "https://mastodon.example/users/ada"},
+    {"type": "Group", "id": "https://mastodon.example/c/rust"}
+  ],
+  "audience": "https://mastodon.example/c/rust",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/c/rust"],
+  "published": "2026-11-08T21:00:00Z",
+  "content": "<p>Posted to a group on behalf of two actors.</p>",
+  "sensitive": false
+}

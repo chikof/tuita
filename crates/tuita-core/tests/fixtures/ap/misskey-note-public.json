@@ -1,0 +1,42 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", "https://w3id.org/security/v1", {"Key": "sec:Key", "manuallyApprovesFollowers": "as:manuallyApprovesFollowers", "sensitive": "as:sensitive", "Hashtag": "as:Hashtag", "quoteUrl": "as:quoteUrl", "fedibird": "http://fedibird.com/ns#", "quoteUri": "fedibird:quoteUri", "toot": "http://joinmastodon.org/ns#", "Emoji": "toot:Emoji", "featured": "toot:featured", "discoverable": "toot:discoverable", "indexable": "toot:indexable", "schema": "http://schema.org#", "PropertyValue": "schema:PropertyValue", "value": "schema:value", "misskey": "https://misskey-hub.net/ns#", "isCat": "misskey:isCat", "_misskey_content": "misskey:_misskey_content", "_misskey_quote": "misskey:_misskey_quote", "_misskey_reaction": "misskey:_misskey_reaction", "_misskey_votes": "misskey:_misskey_votes", "_misskey_summary": "misskey:_misskey_summary", "_misskey_license": "misskey:_misskey_license", "_misskey_followedMessage": "misskey:_misskey_followedMessage", "_misskey_requireSigninToViewContents": "misskey:_misskey_requireSigninToViewContents", "_misskey_makeNotesFollowersOnlyBefore": "misskey:_misskey_makeNotesFollowersOnlyBefore", "_misskey_makeNotesHiddenBefore": "misskey:_misskey_makeNotesHiddenBefore", "freeText": "misskey:freeText", "vcard": "http://www.w3.org/2006/vcard/ns#"}],
+  "id": "https://misskey.example/notes/9a0noteid001",
+  "type": "Note",
+  "attributedTo": "https://misskey.example/users/9a0example01",
+  "content": "<p><span>Look at this </span><a href=\"https://misskey.example/tags/Cats\" rel=\"tag\">#Cats</a><span> from </span><a href=\"https://social.example/@bea\" class=\"u-url mention\">@bea@social.example</a><span> :ablobcat:</span><br><br><span class=\"quote-inline\">RE: <a href=\"https://mastodon.example/users/ada/statuses/113200000000000001\">https://mastodon.example/users/ada/statuses/113200000000000001</a></span></p>",
+  "_misskey_content": "Look at this #Cats from @bea@social.example :ablobcat:",
+  "source": {
+    "content": "Look at this #Cats from @bea@social.example :ablobcat:",
+    "mediaType": "text/x.misskeymarkdown"
+  },
+  "_misskey_quote": "https://mastodon.example/users/ada/statuses/113200000000000001",
+  "quoteUrl": "https://mastodon.example/users/ada/statuses/113200000000000001",
+  "published": "2026-11-08T08:00:00.000Z",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://misskey.example/users/9a0example01/followers", "https://social.example/users/bea"],
+  "inReplyTo": null,
+  "attachment": [
+    {
+      "type": "Document",
+      "mediaType": "image/webp",
+      "url": "https://misskey.example/files/9a0file000001.webp",
+      "name": "A cat asleep on a sofa",
+      "width": 1024,
+      "height": 768,
+      "sensitive": false
+    }
+  ],
+  "sensitive": false,
+  "tag": [
+    {"type": "Hashtag", "href": "https://misskey.example/tags/Cats", "name": "#Cats"},
+    {"type": "Mention", "href": "https://social.example/users/bea", "name": "@bea@social.example"},
+    {
+      "id": "https://misskey.example/emojis/ablobcat",
+      "type": "Emoji",
+      "name": ":ablobcat:",
+      "updated": "2026-10-01T08:00:00.000Z",
+      "icon": {"type": "Image", "mediaType": "image/png", "url": "https://misskey.example/files/emoji/ablobcat.png"},
+      "_misskey_license": {"freeText": null}
+    }
+  ]
+}

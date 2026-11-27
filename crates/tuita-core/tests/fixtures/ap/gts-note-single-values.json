@@ -1,0 +1,29 @@
+{
+  "@context": [
+    "https://gotosocial.org/ns",
+    "https://www.w3.org/ns/activitystreams",
+    {"Emoji": "toot:Emoji", "sensitive": "as:sensitive", "toot": "http://joinmastodon.org/ns#"}
+  ],
+  "attachment": {
+    "mediaType": "image/jpeg",
+    "name": "A stinky creature",
+    "type": "Image",
+    "url": "https://gts.example/fileserver/01H0AVATAR0000000000000000/attachment/original/01F8MH6NEM8D7527KZAECTCR78.jpg"
+  },
+  "attributedTo": "https://gts.example/users/ada",
+  "cc": "https://gts.example/users/ada/followers",
+  "content": "<p>here's a stinky creature -&gt; :shocked_pikachu:</p>",
+  "id": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK1",
+  "published": "2022-11-17T11:36:05Z",
+  "sensitive": false,
+  "tag": {
+    "icon": {"mediaType": "image/png", "type": "Image", "url": "https://gts.example/fileserver/01BPSX2MKCRVMD4YN4D71G9CP5/emoji/original/01AZY1Y5YQD6TREB5W50HGTCSZ.png"},
+    "id": "https://gts.example/emoji/01AZY1Y5YQD6TREB5W50HGTCSZ",
+    "name": ":shocked_pikachu:",
+    "type": "Emoji",
+    "updated": "2022-11-17T11:36:05Z"
+  },
+  "to": "https://www.w3.org/ns/activitystreams#Public",
+  "type": "Note",
+  "url": "https://gts.example/@ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK1"
+}

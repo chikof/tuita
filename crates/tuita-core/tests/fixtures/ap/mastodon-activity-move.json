@@ -1,0 +1,8 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"toot": "http://joinmastodon.org/ns#", "movedTo": {"@id": "as:movedTo", "@type": "@id"}}],
+  "id": "https://mastodon.example/users/ada#moves/3",
+  "type": "Move",
+  "actor": "https://mastodon.example/users/ada",
+  "target": "https://other.example/users/ada",
+  "object": "https://mastodon.example/users/ada"
+}

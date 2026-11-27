@@ -1,0 +1,58 @@
+{
+  "@context": [
+    "https://gotosocial.org/ns",
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "blurhash": "toot:blurhash",
+      "focalPoint": {"@container": "@list", "@id": "toot:focalPoint"},
+      "sensitive": "as:sensitive",
+      "toot": "http://joinmastodon.org/ns#"
+    }
+  ],
+  "attachment": [
+    {
+      "blurhash": "LIIE|gRj00WB-;j[t7j[4nWBj[Rj",
+      "focalPoint": [-0.5, 0.5],
+      "mediaType": "image/jpeg",
+      "name": "Black and white image of some 50's style text saying: Welcome On Board",
+      "type": "Image",
+      "url": "https://gts.example/fileserver/01H0AVATAR0000000000000000/attachment/original/01F8MH6NEM8D7527KZAECTCR76.jpg"
+    },
+    {
+      "blurhash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+      "mediaType": "image/png",
+      "name": "A rainbow over a hill",
+      "type": "Image",
+      "url": "https://gts.example/fileserver/01H0AVATAR0000000000000000/attachment/original/01F8MH6NEM8D7527KZAECTCR77.png"
+    }
+  ],
+  "attributedTo": "https://gts.example/users/ada",
+  "cc": "https://gts.example/users/ada/followers",
+  "content": "<p>Welcome to the <a href=\"https://gts.example/tags/welcome\" class=\"mention hashtag\" rel=\"tag nofollow noreferrer noopener\" target=\"_blank\">#<span>welcome</span></a> thread. This is an example note.</p>",
+  "contentMap": {
+    "en": "<p>Welcome to the <a href=\"https://gts.example/tags/welcome\" class=\"mention hashtag\" rel=\"tag nofollow noreferrer noopener\" target=\"_blank\">#<span>welcome</span></a> thread. This is an example note.</p>"
+  },
+  "id": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK0",
+  "interactionPolicy": {
+    "canLike": {"always": ["https://www.w3.org/ns/activitystreams#Public"], "approvalRequired": []},
+    "canReply": {"always": ["https://www.w3.org/ns/activitystreams#Public"], "approvalRequired": []},
+    "canAnnounce": {"always": ["https://www.w3.org/ns/activitystreams#Public"], "approvalRequired": []}
+  },
+  "published": "2021-11-20T13:32:16Z",
+  "replies": {
+    "first": {
+      "id": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK0/replies?page=true",
+      "next": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK0/replies?only_other_accounts=false&page=true",
+      "partOf": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK0/replies",
+      "type": "CollectionPage"
+    },
+    "id": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK0/replies",
+    "type": "Collection"
+  },
+  "sensitive": false,
+  "summary": "",
+  "tag": {"href": "https://gts.example/tags/welcome", "name": "#welcome", "type": "Hashtag"},
+  "to": "https://www.w3.org/ns/activitystreams#Public",
+  "type": "Note",
+  "url": "https://gts.example/@ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK0"
+}

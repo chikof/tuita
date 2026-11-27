@@ -1,0 +1,8 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000022",
+  "type": "Note",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "published": "2026-11-08T21:20:00Z",
+  "content": "<p>No to and no cc.</p>"
+}

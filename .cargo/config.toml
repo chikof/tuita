@@ -1,0 +1,5 @@
+# Debug builds give every `view!` a stack frame as large as its expansion, and a page renders a dozen
+# frames deep (layout, shell, components): a member's page needs about 2 MiB, the default stack of a
+# test thread; the /design gallery page needs about 9 MiB. Release builds need a fraction.
+[env]
+RUST_MIN_STACK = "16777216"

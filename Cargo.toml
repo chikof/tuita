@@ -1,0 +1,166 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+# The patched copy of crypto-glue is a dependency only: no fmt, clippy or tests of its own.
+exclude = ["vendor/crypto-glue"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.99"
+# Not published: `cargo deny` treats private crates as licence-exempt.
+# To publish a crate, drop `publish = false` in its Cargo.toml.
+publish = false
+version = "0.1.0"
+license = "AGPL-3.0-or-later"
+
+# Every dependency version lives here. Members say `name.workspace = true`.
+[workspace.dependencies]
+tuita-core = { path = "crates/tuita-core" }
+tuita-server = { path = "crates/tuita-server" }
+tuita-web = { path = "crates/tuita-web" }
+anyhow = "1.0.104"
+# Inbound ActivityPub `content` is untrusted HTML; ammonia keeps `p br a span` before it becomes text.
+ammonia = "4.2.4"
+# AES-256-GCM seals the ActivityPub signing keys at rest (`SECRET_KEY`, see `secrets.rs`); already in the tree through crypto-glue and pkcs5.
+aes-gcm = { version = "0.11.1", default-features = false, features = ["aes", "alloc"] }
+argon2 = "0.6.0"
+axum = { version = "0.8.9", features = ["multipart", "ws"] }
+# base64 and sha2 match sqlx's majors so the tree carries one copy each.
+base64 = "0.22.1"
+clap = { version = "4.6.7", features = ["derive"] }
+futures-util = { version = "0.3.34", default-features = false, features = ["std"] }
+governor = "0.10.4"
+# HTTP dates (`Last-Modified`, `If-Modified-Since`) of the media route; already in the tree through hyper.
+httpdate = "1.0.3"
+# JPEG, PNG, GIF and WebP only: every upload is decoded and re-encoded without metadata.
+image = { version = "0.25.10", default-features = false, features = ["jpeg", "png", "gif", "webp"] }
+# Media storage behind one interface: local disk, S3-compatible buckets, memory (tests). `aws-base` + `ring`
+# is the S3 client without its `aws` feature, which would pull aws-lc-rs; the HTTP client is ours, see `media::store`.
+object_store = { version = "0.14.2", default-features = false, features = ["aws-base", "fs", "reqwest", "ring"] }
+rand = "0.10.3"
+# PEM encoding of the keys (rsa re-exports pkcs8 without its `pem` feature).
+pkcs8 = { version = "0.11.0", default-features = false, features = ["pem", "std"] }
+# RSA-2048 keys for HTTP signatures. 0.10.0 final fixes RUSTSEC-2023-0071 (Marvin).
+rsa = { version = "0.10.0", features = ["pkcs1v15"] }
+# Outbound HTTP, only through `net::SafeClient`. rustls with the ring provider sqlx already uses.
+reqwest = { version = "0.13.5", default-features = false, features = ["rustls-no-provider", "http2"] }
+# The ring provider and the bundled roots for `net::SafeClient`; sqlx already links both.
+rustls = { version = "0.23.46", default-features = false, features = ["ring", "std", "tls12"] }
+scraper = { version = "0.29.0", default-features = false }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sha2 = "0.10.9"
+sqlx = { version = "0.9.0", default-features = false, features = ["runtime-tokio", "tls-rustls-ring-webpki", "postgres", "macros", "migrate", "uuid", "time", "json", "ipnet"] }
+# Constant-time comparison of client secrets and PKCE challenges; already in the tree through argon2.
+subtle = "2.6.1"
+thiserror = "2.0.21"
+time = { version = "0.3.55", features = ["serde", "formatting", "parsing"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros", "net", "signal", "sync", "time", "fs"] }
+tower = { version = "0.5.3", features = ["util"] }
+# Server-rendered web client. Pinned: pre-1.0 and early-stage, upgrade in its own task.
+topcoat = { version = "=0.12.1", default-features = false, features = ["router", "view", "runtime", "asset", "serve", "discover", "tower", "metadata", "l10n-fluent", "l10n-datetime"] }
+percent-encoding = "2.3.2"
+# Compact numbers and month-day dates for `fmt`; the ICU major Topcoat already pulls.
+icu_decimal = { version = "2.4.0", features = ["unstable"] }
+icu_datetime = "2.4.0"
+icu_calendar = "2.4.0"
+icu_locale = "2.3.0"
+fixed_decimal = "0.7"
+# Parses the .ftl files in the completeness test.
+fluent-syntax = "0.12.0"
+# Browser e2e harness (crates/tuita-e2e): drives nix Chromium over CDP.
+chromiumoxide = { version = "=0.9.1", default-features = false }
+tokio-util = { version = "0.7.20", default-features = false }
+# Websocket client for tests/mastodon_streaming.rs; the same major as the one axum's `ws` feature pulls.
+tokio-tungstenite = { version = "0.29.0", default-features = false, features = ["connect"] }
+tower-http = { version = "0.7.1", features = ["cors", "request-id", "timeout", "trace", "fs", "set-header"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
+unicode-normalization = "0.1.26"
+url = "2.5.8"
+uuid = { version = "1.29.2", features = ["v7", "serde"] }
+# Software authenticator for the passkey ceremony tests.
+webauthn-authenticator-rs = { version = "0.6.2", default-features = false, features = ["softpasskey"] }
+# Passkeys. webauthn-rs 0.6 is pure RustCrypto (crypto-glue): no OpenSSL, no libssl in the distroless image.
+webauthn-rs = { version = "0.6.2", features = ["danger-allow-state-serialisation", "conditional-ui", "resident-key-support"] }
+webpki-roots = "1.0.11"
+
+[workspace.lints.rust]
+unsafe_code = "deny"            # allow per module only with a SAFETY comment and review
+missing_docs = "warn"           # public items are documented
+unreachable_pub = "warn"        # pub only where the API really exposes it
+variant_size_differences = "warn" # enum variants of very different size waste space; box the big one
+
+[workspace.lints.clippy]
+# imports
+wildcard_imports = "warn"
+enum_glob_use = "warn"
+# ownership and signatures
+borrowed_box = "warn"
+ptr_arg = "warn"
+fn_params_excessive_bools = "warn"
+struct_excessive_bools = "warn"
+# traits
+should_implement_trait = "warn"
+new_without_default = "warn"
+wrong_self_convention = "warn"
+len_without_is_empty = "warn"
+# errors and panics
+unwrap_used = "warn"
+unnecessary_unwrap = "warn"
+missing_panics_doc = "warn"
+missing_errors_doc = "warn"
+undocumented_unsafe_blocks = "warn"
+# API surface
+# Application crate: the exhaustive_* rules only matter across team boundaries.
+exhaustive_enums = "allow"
+exhaustive_structs = "allow"
+must_use_candidate = "warn"
+# style
+needless_for_each = "warn"
+# memory layout and niches (docs/rust-style.md `## Memory layout`, clippy.toml sets the thresholds)
+large_enum_variant = "warn"
+large_futures = "warn"
+large_stack_frames = "warn"
+large_stack_arrays = "warn"
+large_const_arrays = "warn"
+large_types_passed_by_value = "warn"
+trivially_copy_pass_by_ref = "warn"
+needless_pass_by_value = "warn"
+box_collection = "warn"
+vec_box = "warn"
+redundant_allocation = "warn"
+boxed_local = "warn"
+unnecessary_box_returns = "warn"
+rc_buffer = "warn"
+rc_mutex = "warn"
+option_option = "warn"
+ref_option = "warn"
+ref_option_ref = "warn"
+zero_sized_map_values = "warn"
+inefficient_to_string = "warn"
+non_zero_suggestions = "warn"
+
+# Password hashing is unusably slow unoptimised; keep it fast in debug builds and tests.
+[profile.dev.package.argon2]
+opt-level = 3
+[profile.dev.package.blake2]
+opt-level = 3
+# RSA-2048 key generation (a prime search over big integers) takes many seconds unoptimised.
+[profile.dev.package.rsa]
+opt-level = 3
+[profile.dev.package.crypto-bigint]
+opt-level = 3
+[profile.dev.package.crypto-primes]
+opt-level = 3
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = true
+panic = "abort"
+
+# crypto-glue 0.2.2 asks rsa 0.10 for a `sha2` feature that rsa 0.10.0 final dropped, so it cannot
+# resolve against the fixed release. The copy in vendor/crypto-glue differs only in that rsa line.
+[patch.crates-io]
+crypto-glue = { path = "vendor/crypto-glue" }

@@ -1,0 +1,17 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada/followers",
+  "type": "OrderedCollection",
+  "totalItems": 3,
+  "first": {
+    "id": "https://mastodon.example/users/ada/followers?page=1",
+    "type": "OrderedCollectionPage",
+    "totalItems": 3,
+    "partOf": "https://mastodon.example/users/ada/followers",
+    "orderedItems": [
+      "https://social.example/users/bea",
+      "https://gts.example/users/ada",
+      {"id": "https://misskey.example/users/9a0example01", "type": "Person"}
+    ]
+  }
+}

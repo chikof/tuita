@@ -1,0 +1,79 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "ostatus": "http://ostatus.org#",
+      "atomUri": "ostatus:atomUri",
+      "inReplyToAtomUri": "ostatus:inReplyToAtomUri",
+      "conversation": "ostatus:conversation",
+      "sensitive": "as:sensitive",
+      "toot": "http://joinmastodon.org/ns#",
+      "votersCount": "toot:votersCount",
+      "blurhash": "toot:blurhash",
+      "focalPoint": {"@container": "@list", "@id": "toot:focalPoint"},
+      "Hashtag": "as:Hashtag"
+    }
+  ],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000001",
+  "type": "Note",
+  "summary": null,
+  "inReplyTo": null,
+  "published": "2026-11-08T09:30:12Z",
+  "url": "https://mastodon.example/@ada/113200000000000001",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/users/ada/followers", "https://social.example/users/bea"],
+  "sensitive": false,
+  "atomUri": "https://mastodon.example/users/ada/statuses/113200000000000001",
+  "inReplyToAtomUri": null,
+  "conversation": "tag:mastodon.example,2026-11-08:objectId=1001:objectType=Conversation",
+  "content": "<p>Good morning <span class=\"h-card\" translate=\"no\"><a href=\"https://social.example/@bea\" class=\"u-url mention\">@<span>bea</span></a></span>! Photos from the walk <a href=\"https://mastodon.example/tags/rustlang\" class=\"mention hashtag\" rel=\"tag\">#<span>rustlang</span></a> <a href=\"https://mastodon.example/tags/Autumn\" class=\"mention hashtag\" rel=\"tag\">#<span>Autumn</span></a> :blobcat:</p><p>Second paragraph &amp; a line<br />break.</p>",
+  "contentMap": {
+    "en": "<p>Good morning <span class=\"h-card\" translate=\"no\"><a href=\"https://social.example/@bea\" class=\"u-url mention\">@<span>bea</span></a></span>! Photos from the walk <a href=\"https://mastodon.example/tags/rustlang\" class=\"mention hashtag\" rel=\"tag\">#<span>rustlang</span></a> <a href=\"https://mastodon.example/tags/Autumn\" class=\"mention hashtag\" rel=\"tag\">#<span>Autumn</span></a> :blobcat:</p><p>Second paragraph &amp; a line<br />break.</p>"
+  },
+  "attachment": [
+    {
+      "type": "Document",
+      "mediaType": "image/jpeg",
+      "url": "https://mastodon.example/system/media_attachments/files/113/200/000/000/000/001/original/walk1.jpg",
+      "name": "A path through a wood in autumn",
+      "blurhash": "UBGSA@~q9Zof_3ofIUj[9Zof9Zay?bj[ofj[",
+      "focalPoint": [0.0, 0.0],
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "type": "Document",
+      "mediaType": "image/png",
+      "url": "https://mastodon.example/system/media_attachments/files/113/200/000/000/000/002/original/walk2.png",
+      "name": null,
+      "blurhash": "LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
+      "width": 800,
+      "height": 600
+    }
+  ],
+  "tag": [
+    {"type": "Mention", "href": "https://social.example/users/bea", "name": "@bea@social.example"},
+    {"type": "Hashtag", "href": "https://mastodon.example/tags/rustlang", "name": "#rustlang"},
+    {"type": "Hashtag", "href": "https://mastodon.example/tags/autumn", "name": "#Autumn"},
+    {
+      "id": "https://mastodon.example/emojis/17",
+      "type": "Emoji",
+      "name": ":blobcat:",
+      "updated": "2024-03-01T10:00:00Z",
+      "icon": {"type": "Image", "mediaType": "image/png", "url": "https://mastodon.example/system/custom_emojis/images/000/000/017/original/blobcat.png"}
+    }
+  ],
+  "replies": {
+    "id": "https://mastodon.example/users/ada/statuses/113200000000000001/replies",
+    "type": "Collection",
+    "first": {
+      "type": "CollectionPage",
+      "next": "https://mastodon.example/users/ada/statuses/113200000000000001/replies?only_other_accounts=true&page=true",
+      "partOf": "https://mastodon.example/users/ada/statuses/113200000000000001/replies",
+      "items": []
+    }
+  },
+  "likes": {"id": "https://mastodon.example/users/ada/statuses/113200000000000001/likes", "type": "Collection", "totalItems": 3},
+  "shares": {"id": "https://mastodon.example/users/ada/statuses/113200000000000001/shares", "type": "Collection", "totalItems": 1}
+}

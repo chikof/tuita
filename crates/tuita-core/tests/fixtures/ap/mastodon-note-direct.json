@@ -1,0 +1,17 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"sensitive": "as:sensitive"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000003",
+  "type": "Note",
+  "summary": null,
+  "inReplyTo": null,
+  "published": "2026-11-08T11:00:00Z",
+  "url": "https://mastodon.example/@ada/113200000000000003",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "to": ["https://social.example/users/bea"],
+  "cc": [],
+  "sensitive": false,
+  "content": "<p><span class=\"h-card\" translate=\"no\"><a href=\"https://social.example/@bea\" class=\"u-url mention\">@<span>bea</span></a></span> only you should read this.</p>",
+  "contentMap": {"en": "<p><span class=\"h-card\" translate=\"no\"><a href=\"https://social.example/@bea\" class=\"u-url mention\">@<span>bea</span></a></span> only you should read this.</p>"},
+  "attachment": [],
+  "tag": [{"type": "Mention", "href": "https://social.example/users/bea", "name": "@bea@social.example"}]
+}

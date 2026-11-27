@@ -1,0 +1,27 @@
+{
+  "id": "https://gts.example/users/ada/outbox?page=true",
+  "type": "OrderedCollectionPage",
+  "next": "https://gts.example/users/ada/outbox?max_id=01FJC1Q0E3SSQR59TD2M1KP4V8&page=true",
+  "prev": "https://gts.example/users/ada/outbox?min_id=01FJC1Q0E3SSQR59TD2M1KP4V8&page=true",
+  "partOf": "https://gts.example/users/ada/outbox",
+  "orderedItems": [
+    {
+      "id": "https://gts.example/users/ada/statuses/01FJC1MKPVX2VMWP2ST93Q90K7/activity",
+      "type": "Create",
+      "actor": "https://gts.example/users/ada",
+      "published": "2021-10-18T20:06:18Z",
+      "to": ["https://www.w3.org/ns/activitystreams#Public"],
+      "cc": ["https://gts.example/users/ada/followers"],
+      "object": "https://gts.example/users/ada/statuses/01FJC1MKPVX2VMWP2ST93Q90K7"
+    },
+    {
+      "id": "https://gts.example/users/ada/statuses/01FJC1MKPVX2VMWP2ST93Q90K8/activity",
+      "type": "Create",
+      "actor": "https://gts.example/users/ada",
+      "published": "2021-10-18T19:06:18Z",
+      "to": ["https://www.w3.org/ns/activitystreams#Public"],
+      "cc": ["https://gts.example/users/ada/followers"],
+      "object": "https://gts.example/users/ada/statuses/01FJC1MKPVX2VMWP2ST93Q90K8"
+    }
+  ]
+}

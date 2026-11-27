@@ -1,0 +1,49 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", "https://w3id.org/security/v1", {"Key": "sec:Key", "manuallyApprovesFollowers": "as:manuallyApprovesFollowers", "sensitive": "as:sensitive", "Hashtag": "as:Hashtag", "quoteUrl": "as:quoteUrl", "fedibird": "http://fedibird.com/ns#", "quoteUri": "fedibird:quoteUri", "toot": "http://joinmastodon.org/ns#", "Emoji": "toot:Emoji", "featured": "toot:featured", "discoverable": "toot:discoverable", "indexable": "toot:indexable", "schema": "http://schema.org#", "PropertyValue": "schema:PropertyValue", "value": "schema:value", "misskey": "https://misskey-hub.net/ns#", "isCat": "misskey:isCat", "_misskey_content": "misskey:_misskey_content", "_misskey_quote": "misskey:_misskey_quote", "_misskey_reaction": "misskey:_misskey_reaction", "_misskey_votes": "misskey:_misskey_votes", "_misskey_summary": "misskey:_misskey_summary", "_misskey_license": "misskey:_misskey_license", "_misskey_followedMessage": "misskey:_misskey_followedMessage", "_misskey_requireSigninToViewContents": "misskey:_misskey_requireSigninToViewContents", "_misskey_makeNotesFollowersOnlyBefore": "misskey:_misskey_makeNotesFollowersOnlyBefore", "_misskey_makeNotesHiddenBefore": "misskey:_misskey_makeNotesHiddenBefore", "freeText": "misskey:freeText", "vcard": "http://www.w3.org/2006/vcard/ns#"}],
+  "type": "Person",
+  "id": "https://misskey.example/users/9a0example01",
+  "inbox": "https://misskey.example/users/9a0example01/inbox",
+  "outbox": "https://misskey.example/users/9a0example01/outbox",
+  "followers": "https://misskey.example/users/9a0example01/followers",
+  "following": "https://misskey.example/users/9a0example01/following",
+  "featured": "https://misskey.example/users/9a0example01/collections/featured",
+  "sharedInbox": "https://misskey.example/inbox",
+  "endpoints": {"sharedInbox": "https://misskey.example/inbox"},
+  "url": "https://misskey.example/@ada",
+  "preferredUsername": "ada",
+  "name": "Ada :ablobcat:",
+  "summary": "<p><span>Hello! I like </span><a href=\"https://misskey.example/tags/cats\" rel=\"tag\">#cats</a><span> and </span><a href=\"https://home.example/ada\" rel=\"nofollow noopener\" target=\"_blank\">https://home.example/ada</a></p>",
+  "_misskey_summary": "Hello! I like #cats and https://home.example/ada",
+  "_misskey_followedMessage": null,
+  "_misskey_requireSigninToViewContents": false,
+  "_misskey_makeNotesFollowersOnlyBefore": null,
+  "_misskey_makeNotesHiddenBefore": null,
+  "icon": {"type": "Image", "url": "https://misskey.example/files/9a0avatar0001.webp", "sensitive": false, "name": null},
+  "image": {"type": "Image", "url": "https://misskey.example/files/9a0banner0001.png", "sensitive": false, "name": null},
+  "tag": [
+    {
+      "id": "https://misskey.example/emojis/ablobcat",
+      "type": "Emoji",
+      "name": ":ablobcat:",
+      "updated": "2026-10-01T08:00:00.000Z",
+      "icon": {"type": "Image", "mediaType": "image/png", "url": "https://misskey.example/files/emoji/ablobcat.png"},
+      "_misskey_license": {"freeText": null}
+    },
+    {"type": "Hashtag", "href": "https://misskey.example/tags/cats", "name": "#cats"}
+  ],
+  "manuallyApprovesFollowers": false,
+  "discoverable": true,
+  "publicKey": {
+    "id": "https://misskey.example/users/9a0example01#main-key",
+    "type": "Key",
+    "owner": "https://misskey.example/users/9a0example01",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtUdm+hegOnsMD/6GMwpP\n+9ljM+kKx1OZJZZE+AQEL+Pr6dmOOcZ9jYxzV6mfwuBqP69Sq/v5eNx0oApi0AiV\n8WFX/4CdOi17iaAzF1T+xh0Mw1jt5K+YQCLxKHiEezupJSVeWrzd3dfIiMYGFnsN\nInfPg5ato60ntrDESSUXy5Rqu9tqzMMtS1XSzJnFi63zJZUWIItrAqEh+Ez93ui4\nbT6a9bJpy+vua9XdK/+Pyz8811h6Otbpqtx0+xaltNz31xrKqW4LUQ+1y+XCwM1x\n7z5Jze8rmmoBHDMnb+K5VQZhPMN+umh0X6r3Lr1voHUfJo9wKShLKCUakLCZfdQT\newIDAQAB\n-----END PUBLIC KEY-----\n"
+  },
+  "isCat": true,
+  "attachment": [
+    {"type": "PropertyValue", "name": "Website", "value": "<a href=\"https://home.example/ada\" rel=\"me nofollow noopener\" target=\"_blank\">https://home.example/ada</a>"},
+    {"type": "PropertyValue", "name": "Pronouns", "value": "she/they"}
+  ],
+  "vcard:bday": "1990-05-17",
+  "vcard:Address": "Somewhere"
+}

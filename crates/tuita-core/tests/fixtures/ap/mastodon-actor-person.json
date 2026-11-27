@@ -1,0 +1,66 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+    {
+      "manuallyApprovesFollowers": "as:manuallyApprovesFollowers",
+      "toot": "http://joinmastodon.org/ns#",
+      "featured": {"@id": "toot:featured", "@type": "@id"},
+      "featuredTags": {"@id": "toot:featuredTags", "@type": "@id"},
+      "alsoKnownAs": {"@id": "as:alsoKnownAs", "@type": "@id"},
+      "movedTo": {"@id": "as:movedTo", "@type": "@id"},
+      "schema": "http://schema.org#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "discoverable": "toot:discoverable",
+      "suspended": "toot:suspended",
+      "memorial": "toot:memorial",
+      "indexable": "toot:indexable",
+      "attributionDomains": {"@id": "toot:attributionDomains", "@type": "@id"},
+      "focalPoint": {"@container": "@list", "@id": "toot:focalPoint"}
+    }
+  ],
+  "id": "https://mastodon.example/users/ada",
+  "type": "Person",
+  "following": "https://mastodon.example/users/ada/following",
+  "followers": "https://mastodon.example/users/ada/followers",
+  "inbox": "https://mastodon.example/users/ada/inbox",
+  "outbox": "https://mastodon.example/users/ada/outbox",
+  "featured": "https://mastodon.example/users/ada/collections/featured",
+  "featuredTags": "https://mastodon.example/users/ada/collections/tags",
+  "preferredUsername": "ada",
+  "name": "Ada Example :blobcat:",
+  "summary": "<p>Writes Rust, walks in woods. <a href=\"https://mastodon.example/tags/rustlang\" class=\"mention hashtag\" rel=\"tag\">#<span>rustlang</span></a></p>",
+  "url": "https://mastodon.example/@ada",
+  "manuallyApprovesFollowers": false,
+  "discoverable": true,
+  "indexable": true,
+  "published": "2022-11-09T00:00:00Z",
+  "memorial": false,
+  "attributionDomains": ["ada.example"],
+  "devices": "https://mastodon.example/users/ada/collections/devices",
+  "alsoKnownAs": ["https://old.example/users/ada"],
+  "publicKey": {
+    "id": "https://mastodon.example/users/ada#main-key",
+    "owner": "https://mastodon.example/users/ada",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtUdm+hegOnsMD/6GMwpP\n+9ljM+kKx1OZJZZE+AQEL+Pr6dmOOcZ9jYxzV6mfwuBqP69Sq/v5eNx0oApi0AiV\n8WFX/4CdOi17iaAzF1T+xh0Mw1jt5K+YQCLxKHiEezupJSVeWrzd3dfIiMYGFnsN\nInfPg5ato60ntrDESSUXy5Rqu9tqzMMtS1XSzJnFi63zJZUWIItrAqEh+Ez93ui4\nbT6a9bJpy+vua9XdK/+Pyz8811h6Otbpqtx0+xaltNz31xrKqW4LUQ+1y+XCwM1x\n7z5Jze8rmmoBHDMnb+K5VQZhPMN+umh0X6r3Lr1voHUfJo9wKShLKCUakLCZfdQT\newIDAQAB\n-----END PUBLIC KEY-----\n"
+  },
+  "tag": [
+    {
+      "id": "https://mastodon.example/emojis/17",
+      "type": "Emoji",
+      "name": ":blobcat:",
+      "updated": "2024-03-01T10:00:00Z",
+      "icon": {"type": "Image", "mediaType": "image/png", "url": "https://mastodon.example/system/custom_emojis/images/000/000/017/original/blobcat.png"}
+    },
+    {"type": "Hashtag", "href": "https://mastodon.example/tags/rustlang", "name": "#rustlang"}
+  ],
+  "attachment": [
+    {"type": "PropertyValue", "name": "Website", "value": "<a href=\"https://ada.example/\" target=\"_blank\" rel=\"nofollow noopener me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">ada.example/</span><span class=\"invisible\"></span></a>"},
+    {"type": "PropertyValue", "name": "Pronouns", "value": "she/her"},
+    {"type": "PropertyValue", "name": "Location", "value": "A wood"}
+  ],
+  "endpoints": {"sharedInbox": "https://mastodon.example/inbox"},
+  "icon": {"type": "Image", "mediaType": "image/jpeg", "url": "https://mastodon.example/system/accounts/avatars/000/000/001/original/ada.jpg"},
+  "image": {"type": "Image", "mediaType": "image/png", "url": "https://mastodon.example/system/accounts/headers/000/000/001/original/ada-banner.png"}
+}

@@ -1,0 +1,11 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/e1d4c8a2-91b7-4f1c-8f0e-2b6a1d3c5e7f",
+  "type": "Flag",
+  "actor": "https://mastodon.example/actor",
+  "content": "Spam: advertises a casino in every reply.",
+  "object": [
+    "https://social.example/users/bea",
+    "https://social.example/users/bea/statuses/0192a4b6-7c3e-7f10-9a42-3d5c8e1f2a07"
+  ]
+}

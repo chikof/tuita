@@ -1,0 +1,11 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000011/activity",
+  "type": "Announce",
+  "actor": "https://mastodon.example/users/ada",
+  "published": "2026-11-08T16:00:00Z",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/users/ada/followers", "https://social.example/users/bea"],
+  "object": "https://social.example/users/bea/statuses/0192a4b6-7c3e-7f10-9a42-3d5c8e1f2a07",
+  "atomUri": "https://mastodon.example/users/ada/statuses/113200000000000011/activity"
+}

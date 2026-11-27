@@ -1,0 +1,22 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", {"ostatus": "http://ostatus.org#", "sensitive": "as:sensitive", "toot": "http://joinmastodon.org/ns#", "votersCount": "toot:votersCount"}],
+  "id": "https://mastodon.example/users/ada/statuses/113200000000000005",
+  "type": "Question",
+  "summary": null,
+  "inReplyTo": null,
+  "published": "2026-11-08T13:00:00Z",
+  "url": "https://mastodon.example/@ada/113200000000000005",
+  "attributedTo": "https://mastodon.example/users/ada",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://mastodon.example/users/ada/followers"],
+  "sensitive": false,
+  "content": "<p>Tea or coffee?</p>",
+  "endTime": "2026-11-09T13:00:00Z",
+  "votersCount": 7,
+  "oneOf": [
+    {"type": "Note", "name": "Tea", "replies": {"type": "Collection", "totalItems": 4}},
+    {"type": "Note", "name": "Coffee", "replies": {"type": "Collection", "totalItems": 3}}
+  ],
+  "attachment": [],
+  "tag": []
+}

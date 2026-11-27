@@ -1,0 +1,158 @@
+/* The OAuth consent card. Owner: W4f. */
+
+@scope ([data-c="consent-card"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	/* The states of the card are all in the markup; `hidden` picks the one that shows. */
+	.part {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		min-width: 0;
+	}
+
+	.part[hidden],
+	.center[hidden],
+	.error[hidden] {
+		display: none;
+	}
+
+	h2 {
+		font-family: var(--font-pixel);
+		font-size: var(--t-lg);
+	}
+
+	.app {
+		font-family: var(--font-pixel);
+		font-size: var(--t-xl);
+		line-height: 1.2;
+	}
+
+	.site {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: var(--s1) var(--s2);
+		font-size: var(--t-sm);
+	}
+
+	a {
+		color: var(--ink);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+	}
+
+	.small {
+		font-size: var(--t-sm);
+	}
+
+	.note {
+		padding: var(--s3);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-size: var(--t-sm);
+	}
+
+	.mono-tag {
+		margin-top: var(--s2);
+	}
+
+	.scopes {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.scopes li {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--s2);
+	}
+
+	.target {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+	}
+
+	.target strong {
+		font-family: var(--font-mono);
+		font-weight: 500;
+	}
+
+	.uri {
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		color: var(--ink-dim);
+	}
+
+	.error {
+		color: var(--danger);
+		font-size: var(--t-sm);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: center;
+		gap: var(--s3);
+		margin-top: var(--s2);
+	}
+
+	.link {
+		align-self: center;
+		font-size: var(--t-sm);
+		min-height: 24px;
+	}
+
+	.center {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s3);
+		padding: var(--s4) 0;
+		text-align: center;
+	}
+
+	.code {
+		width: 100%;
+		min-height: 44px;
+		padding: var(--s3);
+		background: var(--paper);
+		border: 1px solid var(--line-hot);
+		border-radius: var(--r-ctl);
+		color: var(--ink);
+		font-family: var(--font-mono);
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+		resize: none;
+	}
+
+	@media (pointer: coarse) {
+		.link,
+		.site a {
+			display: inline-flex;
+			align-items: center;
+			min-height: 44px;
+		}
+	}
+}
+
+/* The buttons are components of their own, outside the scope. */
+[data-c='consent-card'] .actions .btn {
+	flex: 1 1 140px;
+}

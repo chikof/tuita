@@ -1,0 +1,773 @@
+/* Direct messages and encrypted messages: the two-pane frame, the conversation list, the thread,
+   the composer and its prompts, the safety number and the encryption settings. Each
+   block is scoped to the component of the same `data-c` name with @scope; rules for markup a
+   nested component draws sit outside the scope and name the owner explicitly. */
+
+/* messages: the list gives way to the open thread, and the index shows only
+   the list, until the column fits both. */
+@scope ([data-c="messages"]) to ([data-c]) {
+	:scope {
+		container-type: inline-size;
+	}
+
+	:scope.open .list,
+	:scope:not(.open) .pane {
+		display: none;
+	}
+
+	.search {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		margin: var(--s3) var(--s4);
+		padding: 0 var(--s3);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		color: var(--ink-dim);
+	}
+
+	.search:focus-within {
+		border-color: var(--line-hot);
+	}
+
+	.search input {
+		flex: 1;
+		min-width: 0;
+		min-height: 40px;
+		background: transparent;
+		border: 0;
+		color: var(--ink);
+		font: inherit;
+		outline: none;
+	}
+
+	.more {
+		display: block;
+		padding: var(--s3);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		text-align: center;
+	}
+
+	.note {
+		margin: 0;
+		padding: var(--s4);
+		color: var(--ink-dim);
+		text-align: center;
+	}
+
+	.note[hidden] {
+		display: none;
+	}
+
+	.split-only {
+		display: none;
+	}
+
+	@container (min-width: 720px) {
+		.split {
+			display: grid;
+			grid-template-columns: 340px minmax(0, 1fr);
+			min-height: 100dvh;
+		}
+
+		:scope.open .list,
+		:scope:not(.open) .pane {
+			display: block;
+		}
+
+		.list {
+			position: sticky;
+			top: 0;
+			align-self: start;
+			height: 100dvh;
+			overflow-y: auto;
+			overscroll-behavior: contain;
+			border-inline-end: 1px solid var(--line);
+		}
+
+		.narrow-only {
+			display: none;
+		}
+
+		.split-only {
+			display: block;
+		}
+	}
+}
+
+/* The rows are plain links, not a <ul>: the "more" link and the rows that follow it share one
+   container. They are components of their own, so these rules sit outside the scope. */
+[data-c="messages"] .rows > a {
+	border-bottom: 1px solid var(--line);
+}
+
+/* The thread sits beside the list: no back arrow. The bar is a component of its own. */
+@container (min-width: 720px) {
+	[data-c="messages"] .pane [data-c="page-bar"] [data-back] {
+		display: none;
+	}
+}
+
+[data-c="conversation-row"][hidden] {
+	display: none;
+}
+
+/* chat-start */
+@scope ([data-c="chat-start"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--s3);
+		min-height: 100dvh;
+		padding: var(--s6) var(--s5);
+		text-align: center;
+	}
+
+	.art {
+		display: grid;
+		place-items: center;
+		width: 88px;
+		height: 88px;
+		margin-bottom: var(--s2);
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		background: var(--surface);
+	}
+
+	p {
+		max-width: 32ch;
+		color: var(--ink-dim);
+	}
+}
+
+/* conversation-row */
+@scope ([data-c="conversation-row"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		gap: var(--s3);
+		padding: var(--s3) var(--s4);
+		color: var(--ink);
+		text-decoration: none;
+		min-height: 44px;
+	}
+
+	:scope:hover {
+		background: var(--surface);
+	}
+
+	:scope.active {
+		background: var(--surface);
+		box-shadow: inset 3px 0 0 var(--ink);
+	}
+
+	.text {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+	}
+
+	.head {
+		display: flex;
+		align-items: baseline;
+		gap: var(--s2);
+		min-width: 0;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		white-space: nowrap;
+	}
+
+	.handle {
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.time {
+		flex: none;
+		margin-inline-start: auto;
+	}
+
+	.preview {
+		color: var(--ink-dim);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.preview [hidden] {
+		display: none;
+	}
+
+	:scope.unread .preview {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	@media (pointer: coarse) {
+		:scope {
+			min-height: 64px;
+		}
+	}
+}
+
+[data-c="conversation-row"] .preview svg {
+	display: inline-block;
+	vertical-align: -2px;
+	margin-inline-end: var(--s1);
+}
+
+/* chat-thread */
+@scope ([data-c="chat-thread"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		padding: var(--s4);
+	}
+
+	.older {
+		display: flex;
+		justify-content: center;
+	}
+
+	.intro {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s1);
+		padding: var(--s6) 0;
+		text-align: center;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.item {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		max-width: 100%;
+	}
+
+	.item.first {
+		margin-top: var(--s3);
+	}
+
+	.item.mine {
+		align-items: flex-end;
+	}
+
+	.line {
+		display: flex;
+		align-items: center;
+		gap: var(--s1);
+		max-width: 85%;
+	}
+
+	.mine .line {
+		flex-direction: row-reverse;
+	}
+
+	.bubble {
+		margin: 0;
+		padding: var(--s2) var(--s3);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		overflow-wrap: anywhere;
+		min-width: 0;
+	}
+
+	.bubble.hidden {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s2);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		font-style: italic;
+	}
+
+	.bubble [hidden] {
+		display: none;
+	}
+
+	.bubble [data-text] {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+	}
+
+	.bubble [data-text] a {
+		color: var(--ink);
+		text-decoration: underline;
+		text-decoration-style: dotted;
+		text-underline-offset: 3px;
+	}
+
+	.bubble [data-text] a:hover {
+		text-decoration-style: solid;
+	}
+
+	.plain {
+		display: inline-grid;
+		flex: none;
+		color: var(--ink-dim);
+	}
+
+	.mine .bubble {
+		background: var(--paper);
+		border-color: var(--line-hot);
+	}
+
+	.del {
+		opacity: 0;
+	}
+
+	.line:hover .del,
+	.line:focus-within .del {
+		opacity: 1;
+	}
+
+	@media (pointer: coarse) {
+		.del {
+			opacity: 1;
+		}
+	}
+
+	.meta {
+		display: flex;
+		gap: var(--s2);
+		align-items: center;
+		margin: var(--s1) 0 0;
+		color: var(--ink-dim);
+		font-size: var(--t-xs);
+	}
+
+	.meta[hidden] {
+		display: none;
+	}
+
+	.seen {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+	}
+
+	.seen[hidden] {
+		display: none;
+	}
+}
+
+/* chat-note */
+@scope ([data-c="chat-note"]) to ([data-c]) {
+	.note {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--s2);
+		margin: 0;
+		padding: var(--s2) var(--s4);
+		border-bottom: 1px solid var(--line);
+		background: var(--surface);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.note[hidden],
+	.link[hidden] {
+		display: none;
+	}
+
+	.link {
+		margin-inline-start: auto;
+		min-height: 32px;
+		padding: 0 var(--s2);
+		background: none;
+		border: 0;
+		color: var(--ink);
+		font: inherit;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+/* chat: short conversations keep the composer at the bottom of
+   the screen (the page minus the top bar, page bar and bottom bar). */
+@scope ([data-c="chat"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		min-height: calc(100dvh - 185px);
+	}
+
+	.dock {
+		margin-top: auto;
+		position: sticky;
+		bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+		z-index: 4;
+		padding: var(--s3) var(--s4);
+		background: var(--paper);
+		border-top: 1px solid var(--line);
+	}
+
+	/* A prompt or warning is taller than a composer: it scrolls with the thread instead of
+	   covering it. */
+	.dock.tall {
+		position: static;
+	}
+
+	@media (min-width: 760px) {
+		:scope {
+			min-height: calc(100dvh - 57px);
+		}
+
+		.dock {
+			bottom: 0;
+		}
+
+		.dock.tall {
+			position: static;
+		}
+	}
+}
+
+/* chat-footer */
+@scope ([data-c="chat-footer"]) to ([data-c]) {
+	:scope,
+	.rest {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	[data-block][hidden] {
+		display: none;
+	}
+
+	form {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+	}
+
+	input {
+		flex: 1;
+		min-width: 0;
+		min-height: 44px;
+		padding: 0 var(--s3);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		color: var(--ink);
+		font: inherit;
+	}
+
+	input:focus-visible {
+		border-color: var(--line-hot);
+	}
+
+	.note {
+		margin: 0;
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+}
+
+/* The warning is drawn by E2eeNotice; its slot content is ChatFooter's. */
+[data-c="chat-footer"] [data-block][hidden] {
+	display: none;
+}
+
+[data-c="chat-footer"] dl {
+	display: grid;
+	gap: var(--s1);
+	margin: 0;
+}
+
+[data-c="chat-footer"] dl[hidden] {
+	display: none;
+}
+
+[data-c="chat-footer"] dt {
+	color: var(--ink-dim);
+	font-size: var(--t-xs);
+	font-family: var(--font-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+[data-c="chat-footer"] dd {
+	margin: 0;
+	font-family: var(--font-mono);
+	overflow-wrap: anywhere;
+}
+
+/* e2ee-notice */
+@scope ([data-c="e2ee-notice"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		display: flex;
+		gap: var(--s3);
+		padding: var(--s3) var(--s3) var(--s3) var(--s4);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		overflow: hidden;
+	}
+
+	:scope[hidden] {
+		display: none;
+	}
+
+	.stripe {
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 6px;
+		background: var(--ink);
+		mask-size: calc(var(--cell) * 4);
+		-webkit-mask-size: calc(var(--cell) * 4);
+		image-rendering: pixelated;
+	}
+
+	:scope.info .stripe {
+		mask-image: var(--m25);
+		-webkit-mask-image: var(--m25);
+	}
+
+	:scope.warning {
+		border-color: var(--danger);
+	}
+
+	:scope.warning .stripe {
+		background: var(--danger);
+	}
+
+	:scope.warning .icon {
+		color: var(--danger);
+	}
+
+	.icon {
+		display: inline-grid;
+		flex: none;
+		padding-top: 2px;
+	}
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		min-width: 0;
+		font-size: var(--t-sm);
+		overflow-wrap: anywhere;
+	}
+
+	h3 {
+		font-size: var(--t-md);
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s2);
+	}
+}
+
+/* e2ee-prompt */
+@scope ([data-c="e2ee-prompt"]) to ([data-c]) {
+	:scope {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+		padding: var(--s4);
+		background: var(--surface);
+		border: 1px solid var(--line-hot);
+		border-radius: var(--r-card);
+	}
+
+	:scope.bare {
+		padding: 0;
+		background: none;
+		border: 0;
+	}
+
+	header {
+		display: flex;
+		align-items: center;
+		gap: var(--s3);
+	}
+
+	.art {
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border: 1px solid var(--line);
+		border-radius: var(--r-card);
+		background: var(--paper);
+	}
+
+	h2 {
+		font-size: var(--t-lg);
+	}
+
+	.body,
+	.warn {
+		font-size: var(--t-sm);
+	}
+
+	.body {
+		color: var(--ink-dim);
+	}
+
+	.warn {
+		padding-inline-start: var(--s3);
+		border-inline-start: 2px solid var(--danger);
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s3);
+	}
+
+	.end {
+		display: flex;
+		justify-content: flex-end;
+	}
+}
+
+/* safety-dialog */
+@scope ([data-c="safety-dialog"]) to ([data-c]) {
+	.body {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.number {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--s2);
+		margin: var(--s4) 0 0;
+		padding: var(--s3);
+		list-style: none;
+		background: var(--paper);
+		border: 1px solid var(--line);
+		border-radius: var(--r-ctl);
+		font-family: var(--font-mono);
+		font-size: var(--t-lg);
+		letter-spacing: 0.08em;
+		text-align: center;
+	}
+}
+
+/* people-picker: the new-message and share-to-chat dialogs */
+@scope ([data-c="people-picker"]) to ([data-c]) {
+	.results {
+		list-style: none;
+		margin: var(--s3) 0 0;
+		padding: 0;
+		max-height: 50dvh;
+		overflow-y: auto;
+	}
+
+	.pick {
+		display: flex;
+		align-items: center;
+		gap: var(--s3);
+		width: 100%;
+		min-height: 44px;
+		padding: var(--s2);
+		background: transparent;
+		border: 0;
+		color: var(--ink);
+		text-align: left;
+		cursor: pointer;
+	}
+
+	.pick:hover:not(:disabled),
+	.pick:focus-visible {
+		background: var(--surface);
+	}
+
+	.pick:disabled {
+		opacity: 0.5;
+		cursor: wait;
+	}
+
+	.who {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+	}
+
+	.dim {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.note {
+		margin: var(--s3) 0 0;
+		color: var(--ink-dim);
+	}
+
+	.note[hidden] {
+		display: none;
+	}
+
+	.error {
+		color: var(--danger);
+	}
+}
+
+/* e2ee-settings: the cards are setting cards, so these are descendant rules. */
+[data-c="e2ee-settings"] [hidden] {
+	display: none !important;
+}
+
+[data-c="e2ee-settings"] .state {
+	font-family: var(--font-mono);
+}
+
+[data-c="e2ee-settings"] .state.error {
+	color: var(--danger);
+}
+
+[data-c="e2ee-settings"] .end {
+	display: flex;
+	justify-content: flex-end;
+}
+
+[data-c="e2ee-settings"] .reset-body {
+	margin-bottom: var(--s3);
+	padding-inline-start: var(--s3);
+	border-inline-start: 2px solid var(--danger);
+	font-size: var(--t-sm);
+}

@@ -1,0 +1,32 @@
+[package]
+name = "tuita-e2e"
+description = "Browser end-to-end harness and suite: drives Chromium over CDP against a running tuita."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+# `test = false`: a plain `cargo test` (check.sh) skips the suite, which needs a running server and
+# a database. `scripts/e2e.sh` names the target explicitly (`--test e2e`).
+[[test]]
+name = "e2e"
+path = "tests/e2e/main.rs"
+test = false
+
+[dependencies]
+anyhow.workspace = true
+chromiumoxide.workspace = true
+futures-util.workspace = true
+image.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["process", "io-util"] }
+uuid.workspace = true
+
+[dev-dependencies]
+axum.workspace = true
+base64.workspace = true
+sha2.workspace = true

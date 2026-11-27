@@ -1,0 +1,28 @@
+[files]
+extend-exclude = [
+  "Cargo.lock",
+  "deny.toml",
+  "vendor",
+  # axe-core is vendored third-party code.
+  "crates/tuita-e2e/js/axe.min.js",
+  # Base64url ciphertexts and backups made by the old client: random letters, not words.
+  "crates/tuita-e2e/js/units/e2ee.test.js",
+  # Translations are data in other languages; en.ftl stays checked.
+  "crates/tuita-web/src/l10n/[a-df-z]*.ftl",
+  "crates/tuita-web/src/l10n/e[a-mo-z]*.ftl",
+]
+
+[default.extend-words]
+# "`Box::pin`ned" in docs/rust-style.md splits into the token "ned".
+ned = "ned"
+# "PNGs" splits into the token "PN".
+PN = "PN"
+# MP4 and QuickTime box names: `trak` is the track box, `mak` the `©mak` camera make atom.
+trak = "trak"
+mak = "mak"
+# The ICU `writeable` crate and German month names in fmt tests.
+writeable = "writeable"
+Writeable = "Writeable"
+Januar = "Januar"
+# The HTMLMediaElement event `seeked` (video.js).
+seeked = "seeked"

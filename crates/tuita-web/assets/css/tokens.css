@@ -1,0 +1,116 @@
+/* Source of truth for color. the design-token test parses the hex values below. */
+
+:root,
+[data-theme='dark'] {
+	color-scheme: dark;
+	--paper: #0b0b0d;
+	--surface: #101013;
+	--surface-hover: #141418;
+	--ink-dim: #9b988f;
+	--line: #2a2a30;
+	--line-hot: var(--ink);
+	--danger: #ff6b5a;
+	--shadow: rgb(0 0 0 / 0.9);
+}
+
+[data-theme='light'] {
+	color-scheme: light;
+	--paper: #f2f0ea;
+	--surface: #e9e6dd;
+	--surface-hover: #e1ddd2;
+	--ink-dim: #55524b;
+	--line: #cfcabe;
+	--line-hot: var(--ink);
+	--danger: #b3261e;
+	--shadow: rgb(40 36 24 / 0.35);
+}
+
+:root,
+[data-theme='dark'] [data-ink='bone'],
+[data-theme='dark'][data-ink='bone'] {
+	--ink: #f2f0ea;
+}
+[data-theme='dark'] [data-ink='phosphor'],
+[data-theme='dark'][data-ink='phosphor'] {
+	--ink: #8dff9e;
+}
+[data-theme='dark'] [data-ink='amber'],
+[data-theme='dark'][data-ink='amber'] {
+	--ink: #ffc46b;
+}
+[data-theme='dark'] [data-ink='cyan'],
+[data-theme='dark'][data-ink='cyan'] {
+	--ink: #7fd8ff;
+}
+[data-theme='dark'] [data-ink='rose'],
+[data-theme='dark'][data-ink='rose'] {
+	--ink: #ff9ccf;
+}
+[data-theme='light'] [data-ink='bone'],
+[data-theme='light'][data-ink='bone'] {
+	--ink: #111113;
+}
+[data-theme='light'] [data-ink='phosphor'],
+[data-theme='light'][data-ink='phosphor'] {
+	--ink: #0b5d24;
+}
+[data-theme='light'] [data-ink='amber'],
+[data-theme='light'][data-ink='amber'] {
+	--ink: #7a4300;
+}
+[data-theme='light'] [data-ink='cyan'],
+[data-theme='light'][data-ink='cyan'] {
+	--ink: #00547a;
+}
+[data-theme='light'] [data-ink='rose'],
+[data-theme='light'][data-ink='rose'] {
+	--ink: #8f1652;
+}
+
+:root {
+	--paper-on-ink: var(--paper);
+	--grain-opacity: 0.025;
+
+	--s1: 4px;
+	--s2: 8px;
+	--s3: 12px;
+	--s4: 16px;
+	--s5: 24px;
+	--s6: 32px;
+	--s7: 48px;
+
+	--r-card: 18px;
+	--r-ctl: 10px;
+	--r-pill: 999px;
+	--gap: 14px;
+	--cell: 2px;
+
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--dur: 450ms;
+	--dur-fast: 180ms;
+
+	--text-scale: 1;
+	/* Geist has no CJK glyphs: Japanese falls back to the system's CJK sans. */
+	--font-sans:
+		'Geist', system-ui, 'Hiragino Sans', 'Noto Sans CJK JP', 'Noto Sans JP', 'Yu Gothic', 'Meiryo',
+		sans-serif;
+	--font-mono:
+		'Geist Mono', ui-monospace, 'Hiragino Sans', 'Noto Sans CJK JP', 'Noto Sans JP', 'Yu Gothic',
+		'Meiryo', monospace;
+	--font-pixel:
+		'Geist Pixel', 'Geist Mono', 'Hiragino Sans', 'Noto Sans CJK JP', 'Noto Sans JP', 'Yu Gothic',
+		'Meiryo', monospace;
+	--t-xs: calc(11px * var(--text-scale));
+	--t-sm: calc(13px * var(--text-scale));
+	--t-md: calc(15px * var(--text-scale));
+	--t-lg: calc(18px * var(--text-scale));
+	--t-xl: calc(24px * var(--text-scale));
+	--t-2xl: calc(32px * var(--text-scale));
+	--t-3xl: calc(44px * var(--text-scale));
+}
+
+[data-contrast='more'] {
+	--ink-dim: var(--ink);
+	--line: var(--ink);
+	--grain-opacity: 0;
+}

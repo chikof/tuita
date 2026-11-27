@@ -1,0 +1,22 @@
+{
+  "@context": ["https://gotosocial.org/ns", "https://www.w3.org/ns/activitystreams", {"sensitive": "as:sensitive"}],
+  "attributedTo": "https://gts.example/users/ada",
+  "cc": [
+    "https://gts.example/users/ada/followers",
+    "https://social.example/users/bea",
+    "https://other.example/users/zed"
+  ],
+  "content": "<p><span class=\"h-card\"><a href=\"https://social.example/@bea\" class=\"u-url mention\">@<span>bea</span></a></span> <span class=\"h-card\"><a href=\"https://other.example/@zed\" class=\"u-url mention\">@<span>zed</span></a></span> thanks both!</p>",
+  "id": "https://gts.example/users/ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK2",
+  "inReplyTo": "https://social.example/users/bea/statuses/0192a4b6-7c3e-7f10-9a42-3d5c8e1f2a07",
+  "published": "2026-11-08T19:00:00Z",
+  "sensitive": false,
+  "summary": "",
+  "tag": [
+    {"href": "https://social.example/users/bea", "name": "@bea@social.example", "type": "Mention"},
+    {"href": "https://other.example/users/zed", "name": "@zed@other.example", "type": "Mention"}
+  ],
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "type": "Note",
+  "url": "https://gts.example/@ada/statuses/01FF25D5Q0DH7CHD57CTRS6WK2"
+}

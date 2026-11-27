@@ -1,0 +1,261 @@
+/* The landing page and the sign-in and sign-up pages. Owner: W2b. */
+
+/* Their content sits inside cards, which are components of their own, so these rules are plain
+   descendant rules instead of scoped ones. */
+
+[data-c='landing'] {
+	max-width: 1080px;
+	margin-inline: auto;
+	padding: var(--s5) var(--s4) var(--s7);
+}
+
+[data-c='landing'] > header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--s3);
+	margin-bottom: var(--s5);
+}
+
+[data-c='landing'] .language {
+	flex: 0 1 12rem;
+	min-width: 0;
+}
+
+[data-c='landing'] .home {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	color: var(--ink);
+	text-decoration: none;
+}
+
+[data-c='landing'] .hero {
+	justify-content: flex-end;
+}
+
+/* Real text never sits on dither: the hero copy gets a solid paper panel. */
+[data-c='landing'] .hero-body {
+	position: relative;
+	align-self: flex-start;
+	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--s3);
+	padding: var(--s4);
+	background: var(--paper);
+	border: 1px solid var(--line);
+	border-radius: var(--r-ctl);
+}
+
+[data-c='landing'] h1 {
+	font-size: var(--t-3xl);
+	line-height: 1.05;
+	overflow-wrap: anywhere;
+}
+
+[data-c='landing'] h2 {
+	font-family: var(--font-mono);
+	font-size: var(--t-sm);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--ink-dim);
+	margin-bottom: var(--s3);
+}
+
+[data-c='landing'] .tagline {
+	font-family: var(--font-pixel);
+	font-size: var(--t-xl);
+}
+
+[data-c='landing'] .desc {
+	max-width: 52ch;
+}
+
+[data-c='landing'] .cta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--s3);
+	margin-top: var(--s3);
+}
+
+[data-c='landing'] dl {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s3);
+}
+
+[data-c='landing'] dt {
+	color: var(--ink-dim);
+	font-size: var(--t-sm);
+}
+
+[data-c='landing'] dd {
+	font-family: var(--font-pixel);
+	font-size: var(--t-2xl);
+}
+
+[data-c='landing'] .clock {
+	font-family: var(--font-mono);
+	font-size: var(--t-lg);
+	font-variant-numeric: tabular-nums;
+}
+
+[data-c='landing'] .colon {
+	animation: landing-step 1s steps(1) infinite;
+}
+
+[data-motion='reduce'] [data-c='landing'] .colon {
+	animation: none;
+}
+
+@keyframes landing-step {
+	50% {
+		opacity: 0.2;
+	}
+}
+
+[data-c='landing'] .trends,
+[data-c='landing'] .rules {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s2);
+}
+
+[data-c='landing'] .rules {
+	padding-left: var(--s5);
+	font-size: var(--t-sm);
+}
+
+[data-c='landing'] .trends li {
+	display: flex;
+	justify-content: space-between;
+	gap: var(--s3);
+}
+
+[data-c='landing'] .tag {
+	font-family: var(--font-mono);
+	overflow-wrap: anywhere;
+}
+
+[data-c='landing'] .count {
+	color: var(--ink-dim);
+	font-size: var(--t-sm);
+	white-space: nowrap;
+}
+
+[data-c='landing'] > footer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--s3) var(--s5);
+	margin-top: var(--s6);
+	font-size: var(--t-sm);
+	color: var(--ink-dim);
+}
+
+[data-c='landing'] > footer a {
+	color: var(--ink);
+	text-decoration: underline;
+}
+
+@media (pointer: coarse) {
+	[data-c='landing'] > footer a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+	}
+}
+
+[data-c='auth-card'] {
+	position: relative;
+	overflow: hidden;
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: var(--s5) var(--s4);
+}
+
+[data-c='auth-card'] .col {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	max-width: 420px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: var(--s5);
+}
+
+[data-c='auth-card'] .home {
+	align-self: center;
+	color: var(--ink);
+	text-decoration: none;
+}
+
+[data-c='auth-card'] h1 {
+	font-family: var(--font-pixel);
+	font-size: var(--t-xl);
+	margin-bottom: var(--s2);
+}
+
+[data-c='auth-card'] .sub {
+	color: var(--ink-dim);
+	font-size: var(--t-sm);
+	margin-bottom: var(--s3);
+}
+
+[data-c='auth-card'] .foot {
+	display: flex;
+	justify-content: center;
+	gap: var(--s4);
+	font-size: var(--t-sm);
+}
+
+[data-c='auth-card'] .foot a {
+	color: var(--ink);
+	text-decoration: underline;
+	min-height: 24px;
+}
+
+@media (pointer: coarse) {
+	[data-c='auth-card'] .foot a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+	}
+}
+
+[data-c='auth-card'] .form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s4);
+}
+
+[data-c='auth-card'] .error {
+	color: var(--danger);
+	font-size: var(--t-sm);
+}
+
+[data-c='auth-card'] .or {
+	margin: var(--s3) 0;
+	text-align: center;
+	font-family: var(--font-mono);
+	font-size: var(--t-xs);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--ink-dim);
+}
+
+[data-c='auth-card'] [data-passkey] > [data-c='button'] {
+	width: 100%;
+}
+
+[data-c='auth-card'] .closed {
+	margin-bottom: var(--s4);
+}
+
+[data-c='auth-card'] form a {
+	color: var(--ink);
+	text-decoration: underline;
+}

@@ -1,0 +1,82 @@
+/* Notifications (W4b): one row per notification group. */
+
+@scope ([data-c="notification-row"]) to ([data-c]) {
+	:scope.unread {
+		box-shadow: inset 3px 0 0 var(--ink);
+	}
+
+	:scope.row {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		gap: var(--s3);
+		padding: var(--s4);
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.kind {
+		flex: none;
+		display: flex;
+		width: 24px;
+		padding-top: var(--s1);
+	}
+
+	.main {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+	}
+
+	.text {
+		overflow-wrap: anywhere;
+	}
+
+	.origins {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s2);
+	}
+
+	:scope.unread .text {
+		font-weight: 600;
+	}
+
+	.time {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		font-weight: 400;
+		white-space: nowrap;
+	}
+
+	.snippet {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		overflow: hidden;
+		overflow-wrap: anywhere;
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.context {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		padding: var(--s3) var(--s4) 0;
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		text-decoration: none;
+	}
+
+	.context:hover {
+		text-decoration: underline;
+	}
+
+	:scope.unread .context {
+		font-weight: 600;
+	}
+}

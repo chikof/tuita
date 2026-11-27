@@ -1,0 +1,308 @@
+/* Profile area (W4b): profile page, follow lists, follow button, user rows. Also the link tabs used by every URL-driven tab bar. */
+
+@scope ([data-c="link-tabs"]) to ([data-c]) {
+	/* The tabs share the width and each label is centred, with the underline as wide as the label. */
+	.list {
+		display: flex;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.tab {
+		flex: 1 1 0;
+		display: flex;
+		align-items: stretch;
+		justify-content: center;
+		min-width: 0;
+		min-height: 44px;
+		color: var(--ink-dim);
+		font-weight: 500;
+		text-decoration: none;
+		transition: color var(--dur-fast) ease;
+	}
+
+	.tab:hover,
+	.tab[aria-selected='true'] {
+		color: var(--ink);
+	}
+
+	.text {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		padding: var(--s3) var(--s1);
+	}
+
+	.indicator {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -1px;
+		height: 8px;
+		pointer-events: none;
+		animation: dissolve-in var(--dur-fast) step-end;
+	}
+
+	.indicator i {
+		display: block;
+		height: 100%;
+		background: var(--ink);
+		mask-image: var(--underline);
+		-webkit-mask-image: var(--underline);
+		mask-size: calc(var(--cell) * 4) 100%;
+		-webkit-mask-size: calc(var(--cell) * 4) 100%;
+		mask-repeat: repeat-x;
+		-webkit-mask-repeat: repeat-x;
+		image-rendering: pixelated;
+	}
+}
+
+@scope ([data-c="infinite-list"]) to ([data-c]) {
+	:scope > [role='listitem'] {
+		border-bottom: 1px solid var(--line);
+	}
+
+	:scope > .more a {
+		display: block;
+		padding: var(--s4);
+		color: var(--ink-dim);
+		text-align: center;
+	}
+}
+
+@scope ([data-c="profile-header"]) to ([data-c]) {
+	:scope {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.banner {
+		position: relative;
+		height: 140px;
+		overflow: hidden;
+		background: var(--surface);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.banner img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s2);
+		padding: 0 var(--s4) var(--s4);
+	}
+
+	.top {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: var(--s3);
+		margin-top: -48px;
+	}
+
+	.ring {
+		position: relative;
+		flex: none;
+		padding: var(--s1);
+		background: var(--paper);
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		margin-left: auto;
+		gap: var(--s2);
+		padding-bottom: var(--s2);
+	}
+
+	.alert {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		color: var(--danger);
+		font-size: var(--t-sm);
+	}
+
+	.name {
+		display: flex;
+		font-size: var(--t-xl);
+	}
+
+	.lock {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+	}
+
+	.note {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.line {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s2);
+		color: var(--ink-dim);
+	}
+
+	.bio {
+		overflow-wrap: anywhere;
+	}
+
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s1) var(--s4);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+
+	.item {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--s1);
+	}
+
+	.counts {
+		display: flex;
+		gap: var(--s4);
+	}
+
+	.counts a,
+	.known {
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.counts a:hover,
+	.known:hover {
+		text-decoration: underline;
+	}
+
+	.counts b {
+		font-family: var(--font-mono);
+	}
+
+	.known {
+		display: flex;
+		align-items: center;
+		gap: var(--s2);
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+	}
+}
+
+/* The media filter: the panel is a popover, so its content sits outside the filter's own scope. */
+[data-c="media-filter"] {
+	display: flex;
+	justify-content: flex-end;
+	padding: var(--s2) var(--s4);
+	border-bottom: 1px solid var(--line);
+}
+
+[data-c="media-filter"] .kinds {
+	display: flex;
+	flex-direction: column;
+	margin: calc(var(--s2) - var(--s4));
+	padding: 0;
+}
+
+[data-c="media-filter"] .kind {
+	display: flex;
+	align-items: center;
+	gap: var(--s2);
+	min-height: 40px;
+	padding: 0 var(--s3);
+	background: transparent;
+	border: 0;
+	border-radius: var(--r-ctl);
+	color: var(--ink);
+	text-align: left;
+	text-decoration: none;
+}
+
+[data-c="media-filter"] .kind:hover,
+[data-c="media-filter"] .kind:focus-visible {
+	background: var(--ink);
+	color: var(--paper-on-ink);
+}
+
+[data-c="media-filter"] .kind:focus-visible {
+	outline-offset: -2px;
+}
+
+[data-c="media-filter"] .mark {
+	display: inline-flex;
+	width: 16px;
+	height: 16px;
+}
+
+@scope ([data-c="user-row"]) to ([data-c]) {
+	:scope {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		align-items: flex-start;
+		gap: var(--s3);
+		padding: var(--s4);
+	}
+
+	.text {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--s1);
+	}
+
+	.who {
+		display: flex;
+		flex-direction: column;
+		max-width: 100%;
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.handle {
+		color: var(--ink-dim);
+		font-size: var(--t-sm);
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.badges {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s2);
+		max-width: 100%;
+	}
+
+	.tag {
+		padding: 0 var(--s2);
+		border: 1px solid var(--line);
+		font-family: var(--font-mono);
+		font-size: var(--t-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+	}
+
+	.bio {
+		font-size: var(--t-sm);
+	}
+}
+
+/* A follow button in the right rail's suggestions sits at the end of the row. */
+[data-c="right-rail"] .person [data-follow] {
+	margin-left: auto;
+	flex: none;
+}

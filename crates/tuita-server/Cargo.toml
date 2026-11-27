@@ -1,0 +1,53 @@
+[package]
+name = "tuita-server"
+description = "tuita HTTP server: routes, database, federation and workers."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+tuita-core.workspace = true
+aes-gcm.workspace = true
+anyhow.workspace = true
+argon2.workspace = true
+axum.workspace = true
+base64.workspace = true
+futures-util.workspace = true
+governor.workspace = true
+httpdate.workspace = true
+image.workspace = true
+object_store.workspace = true
+rand.workspace = true
+reqwest.workspace = true
+rustls.workspace = true
+scraper.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+sqlx.workspace = true
+subtle.workspace = true
+thiserror.workspace = true
+time.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+url.workspace = true
+uuid.workspace = true
+webauthn-rs.workspace = true
+webpki-roots.workspace = true
+
+[dev-dependencies]
+# Raw TCP in tests/http.rs: write the request, wait for shutdown.
+tokio = { workspace = true, features = ["io-util", "sync", "time"] }
+# The websocket client of tests/mastodon_streaming.rs.
+tokio-tungstenite.workspace = true
+# A software authenticator that runs the passkey ceremonies in tests/passkeys.rs.
+webauthn-authenticator-rs.workspace = true
+
+[lints]
+workspace = true

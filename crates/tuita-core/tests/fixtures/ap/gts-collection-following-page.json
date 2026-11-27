@@ -1,0 +1,14 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://gts.example/users/ada/following?limit=40",
+  "next": "https://gts.example/users/ada/following?limit=40&max_id=01V1AY4ZJT4JK1NT271SH2WMGH",
+  "orderedItems": [
+    "https://gts.example/users/someone_else",
+    "https://somewhere.else.example/users/another_account",
+    "https://mastodon.example/users/ada"
+  ],
+  "partOf": "https://gts.example/users/ada/following",
+  "prev": "https://gts.example/users/ada/following?limit=40&since_id=021HKBY346X7BPFYANPPJN493P",
+  "totalItems": 397,
+  "type": "OrderedCollectionPage"
+}
